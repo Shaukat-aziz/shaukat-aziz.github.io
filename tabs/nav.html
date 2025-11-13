@@ -1,0 +1,38 @@
+<nav>
+    <div class="nav-logo">
+        <img src="../content/Logo.png" alt="Website Logo" class="website-logo">
+        Shaukat Aziz
+    </div>
+    <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="notes.html">Notes</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog.html">Blog</a>
+        <a href="../content/shaukat_cv.pdf" target="_blank">CV</a>
+    </div>
+    <button class="nav-contact" onclick="openContactModal()">Contact</button>
+
+    <!-- Mobile Menu Toggle -->
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <div class="close-btn" onclick="toggleMenu()">
+        <i class="fas fa-times"></i>
+    </div>
+    <a href="../index.html" onclick="toggleMenu()">Home</a>
+    <a href="notes.html" onclick="toggleMenu()">Notes</a>
+    <a href="projects.html" onclick="toggleMenu()">Projects</a>
+    <a href="blog.html" onclick="toggleMenu()">Blog</a>
+    <a href="../content/shaukat_cv.pdf" target="_blank" onclick="toggleMenu()">CV</a>
+    <button class="nav-contact" onclick="openContactModal(); toggleMenu();">Contact</button>
+</div>
+
+<!-- Overlay for mobile menu -->
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>

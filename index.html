@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaukat Aziz - Physics Research Student | IISc</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Mobile-specific: hide top-right contact button and keep contact inside mobile menu */
+        @media (max-width: 768px) {
+            .nav-contact { display: none !important; }
+            .mobile-menu .nav-contact { display: inline-block !important; }
+        }
+    </style>
+    <!-- Favicon and mobile icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="content/Logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="content/Logo.png">
+    <link rel="apple-touch-icon" href="content/Logo.png">
+    <meta name="theme-color" content="#0a0a1a">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-inner">
+            <img src="content/Logo.png" alt="logo" class="preloader-logo">
+        </div>
+    </div>
+    <div id="navbar">
+        <nav>
+            <div class="nav-logo">
+                <img src="./content/Logo.png" alt="Website Logo" class="website-logo">
+                Shaukat Aziz
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="tabs/notes.html">Notes</a>
+                <a href="tabs/projects.html">Projects</a>
+                <a href="tabs/blog.html">Blog</a>
+                <a href="shaukat_cv.pdf" target="_blank">CV</a>
+            </div>
+            <button class="nav-contact" onclick="openContactModal()">Contact</button>
+            
+            <!-- Mobile Menu Toggle -->
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="close-btn" onclick="toggleMenu()">
+                <i class="fas fa-times"></i>
+            </div>
+            <a href="#home" onclick="toggleMenu()">Home</a>
+            <a href="tabs/notes.html">Notes</a>
+            <a href="tabs/projects.html">Projects</a>
+            <a href="tabs/blog.html">Blog</a>
+            <a href="shaukat_cv.pdf" target="_blank">CV</a>
+            <button class="nav-contact" onclick="openContactModal(); toggleMenu();">Contact</button>
+        </div>
+        
+        <!-- Overlay for mobile menu -->
+        <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+    </div>
+    <div class="background-elements"></div>
+    <nav style="display:none"></nav> <!-- nav is now loaded dynamically -->
+    <div class="container" id="home">
+            <div class="content">
+            <img src="shaukat.png" alt="Shaukat Aziz" class="home-profile-image js-fade-in-image" loading="lazy">
+            <h1>Physics & Innovation</h1>
+            <p>
+                Welcome to my academic portfolio. I'm a BS student at the Indian Institute of Science (IISc),
+                pursuing Physics as my major. Explore my projects, blog posts, and publications.
+            </p>
+            <div class="buttons">
+                <button onclick="window.location.href='#cv'">Download CV</button>
+            </div>
+            <div class="social-icons">
+                <a href="https://iisc.academia.edu/SHAUKATAZIZ" title="Academia.edu" target="_blank"><i class="fas fa-graduation-cap"></i></a>
+                <a href="https://www.researchgate.net/profile/Z-Shaukata-Aziz" title="ResearchGate" target="_blank"><i class="fab fa-researchgate"></i></a>
+                <a href="https://www.linkedin.com/in/z-shaukat-aziz-035901265/" title="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/SHAUKAT23" title="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://orcid.org/my-orcid?orcid=0009-0002-1133-4041" title="ORCID" target="_blank"><i class="fab fa-orcid"></i></a>
+            </div>
+        </div>
+        <div class="bg-main-container">
+            <div class="bg-main">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/JhHMJCUmq28?si=Xcz1kaFGHoLIWkFT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="border-radius: 15px; overflow: hidden;"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="section-container">
+            <h2>About Me</h2>
+            <p>I am a Physics major in my third year of BSc Research program at the prestigious Indian Institute of Science (IISc), Bangalore. I have demonstrated academic excellence with exceptional performance in CBSE board examinations and received a merit certificate for being among the top 0.1% of candidates nationwide in Computer Science.</p>
+            
+            <p>I always had a hobby of exploring new technologies and tools, and after encountering the field of computational physics, I have developed a keen interest in programming and numerical simulations. I am seeking opportunities to apply my analytical abilities and technical knowledge in research projects and contribute to this field while learning from experienced researchers.</p>
+            
+            <div class="education-info">
+                <h3>Education</h3>
+                
+                <div class="education-item">
+                    <h4>Bachelor of Science (Research) - Physics</h4>
+                    <p><strong>Indian Institute of Science (IISc), Bangalore</strong></p>
+                    <p><em>2022 - Present</em></p>
+                    <p>Third-year undergraduate student in a research-focused degree program</p>
+                    <p>Coursework in Advanced Physics, Mathematics, and Computational Methods</p>
+                </div>
+                
+                <div class="education-item">
+                    <h4>Higher Secondary (XII) - CBSE Board</h4>
+                    <p><strong>Velammal Vidyalaya, Mel Ayanambakkam, Chennai</strong></p>
+                    <p><em>2020-2022</em></p>
+                    <p>Science Stream with Computer Science | <strong>Overall Percentage: 96.4%</strong></p>
+                    <p>Received Certificate of Merit for being among top 0.1% candidates in Computer Science</p>
+                </div>
+                
+                <div class="education-item">
+                    <h4>Secondary School (X) - CBSE Board</h4>
+                    <p><strong>Alpha Wisdom Vidyashram, K.K. Nagar, Trichy</strong></p>
+                    <p><em>2018-2020</em></p>
+                    <p><strong>Overall Percentage: 96.4%</strong></p>
+                    <p>Additional Subject: Information Technology with NSQF Level-2 certification</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research" class="section">
+        <div class="section-container">
+            <h2>Research Interests</h2>
+            <div class="research-areas">
+                <div class="research-card">
+                    <h3>Quantum Computing</h3>
+                    <p>Exploring the principles and applications of quantum computation.</p>
+                </div>
+                <div class="research-card">
+                    <h3>Computational Physics</h3>
+                    <p>Numerical and computational methods for solving complex physical problems.</p>
+                </div>
+                <div class="research-card">
+                    <h3>Quantum Materials</h3>
+                    <p>Studying materials with exotic quantum properties and their technological potential.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="section-container">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Quantum Simulation Project</h3>
+                    <p>Computational study of quantum systems using Python.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/SHAUKAT23/PH354" class="project-link">GitHub</a>
+                        <a href="project/PH354.pdf" class="project-link">Paper</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="section">
+        <div class="section-container">
+            <h2>Latest Blog Posts</h2>
+            <div class="blog-posts">
+                <iframe src="https://qphysix.blogspot.com/2025/06/quantum-computing.html" width="100%" height="600" style="border:none;overflow:auto;" title="Quantum Computing Blog"></iframe>
+                <!--
+                <article class="blog-post">
+                    <h3>Understanding Quantum Entanglement</h3>
+                    <p class="blog-date">Published on: [Date]</p>
+                    <p>A deep dive into one of the most fascinating phenomena in quantum mechanics...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </article>
+                <article class="blog-post">
+                    <h3>The Beauty of Mathematical Physics</h3>
+                    <p class="blog-date">Published on: [Date]</p>
+                    <p>Exploring how mathematics serves as the language of the universe...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </article>
+                -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CV Section -->
+    <section id="cv" class="section">
+        <div class="section-container">
+            <h2>Curriculum Vitae</h2>
+            <p>Download my complete academic CV to learn more about my educational background, research experience, and achievements.</p>
+            <div class="cv-actions">
+                <a href="./shaukat_cv.pdf" class="cv-download-btn" download>Download PDF</a>
+                <button class="cv-view-btn" onclick="openCVViewModal()">View Online</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Modal -->
+    <div class="contact-modal" id="contactModal">
+        <div class="contact-modal-content">
+            <div class="contact-modal-header">
+                <h3>Contact Me</h3>
+                <button class="contact-close-btn" onclick="closeContactModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="contact-modal-body">
+                <p>Get in touch for research collaborations, academic discussions, or any inquiries.</p>
+                
+                <div class="contact-options">
+                    <a href="mailto:shaukataziz@atomicmail.io" class="contact-option">
+                        <i class="fas fa-envelope"></i>
+                        <span>shaukataziz@atomicmail.io</span>
+                    </a>
+                    
+                    <a href="https://t.me/shaukatazizzz" class="contact-option" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-telegram"></i>
+                        <span>t.me/shaukatazizzz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CV Viewer Modal -->
+    <div class="cv-view-modal" id="cvViewModal">
+        <div class="cv-view-modal-content">
+            <div class="cv-view-modal-header">
+                <h3>Curriculum Vitae - Shaukat Aziz</h3>
+                <button class="cv-view-close-btn" onclick="closeCVViewModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="cv-view-modal-body">
+                <iframe id="cvViewFrame" src="" width="100%" height="100%" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

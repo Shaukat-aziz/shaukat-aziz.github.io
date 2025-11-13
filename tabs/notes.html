@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes - Shaukat Aziz</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .themed-btn {
+            background: linear-gradient(90deg, #a259ff 0%, #6a4cff 100%);
+            color: #fff !important;
+            border: none;
+            border-radius: 2em;
+            padding: 0.6em 1.6em;
+            font-weight: 500;
+            font-size: 1em;
+            box-shadow: 0 2px 8px rgba(162,89,255,0.08);
+            transition: background 0.2s, box-shadow 0.2s;
+            text-align: center;
+            text-decoration: none !important;
+            margin-bottom: 0.2em;
+            min-width: 140px;
+            display: inline-block;
+        }
+        .themed-btn:hover {
+            background: linear-gradient(90deg, #6a4cff 0%, #a259ff 100%);
+            box-shadow: 0 4px 16px rgba(162,89,255,0.18);
+        }
+        .research-areas {
+            display: flex;
+            gap: 2em;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .research-card {
+            background: rgba(80, 40, 120, 0.18);
+            border-radius: 1.5em;
+            box-shadow: 0 2px 24px rgba(162,89,255,0.12);
+            padding: 2em 1.5em;
+            min-width: 260px;
+            max-width: 350px;
+            flex: 1 1 300px;
+            margin-bottom: 2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .project-links {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7em;
+            justify-content: center;
+            margin-top: 1em;
+        }
+        @media (max-width: 900px) {
+            .research-areas {
+                flex-direction: column;
+                gap: 1.5em;
+                align-items: center;
+            }
+            .research-card {
+                max-width: 95vw;
+                min-width: 220px;
+                width: 100%;
+                padding: 1.2em 0.5em;
+            }
+            .project-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5em;
+                width: 100%;
+            }
+            .themed-btn {
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+                font-size: 1em;
+                padding: 0.7em 0.5em;
+                min-width: unset;
+            }
+        }
+        @media (max-width: 600px) {
+            .section-container {
+                padding: 0.2em;
+            }
+            .research-card {
+                padding: 0.6em 0.1em;
+            }
+            .project-links {
+                gap: 0.3em;
+            }
+            .themed-btn {
+                width: 75%;
+                max-width: 75%;
+                box-sizing: border-box;
+                font-size: 0.92em;
+                padding: 0.5em 0.1em;
+                min-width: unset;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            h2, h3 {
+                font-size: 1.1em;
+            }
+            p {
+                font-size: 0.95em;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-elements"></div>
+    <div id="navbar"></div>
+    <section class="section">
+        <div class="section-container">
+            <h2>Notes</h2>
+            <div class="research-areas">
+                <div class="research-card">
+                    <h3>Quantum Computing (QT207)</h3>
+                    <p>Notes on quantum computation, quantum gates, algorithms, and foundational concepts for QT207. Includes references and solved problems.</p>
+                    <div class="project-links" style="display:flex; gap:0.7em; flex-wrap:wrap; justify-content:center; margin-top:1em;">
+                        <a href="../content/QC.pdf" class="project-link themed-btn">View Notes</a>
+                        <a href="https://scholar.google.com/citations?hl=en&user=b0DLuawAAAAJ" class="project-link themed-btn" target="_blank">Prof. Chandrashekar</a>
+                        <a href="../content/nielsen-chuang.pdf" class="project-link themed-btn" target="_blank">Book: Nielsen & Chuang</a>
+                    </div>
+                </div>
+                <div class="research-card">
+                    <h3>Math Methods of Physics (PH205)</h3>
+                    <p>Course notes on mathematical methods for solving complex physical problems.</p>
+                    <div class="project-links" style="display:flex; gap:0.7em; flex-wrap:wrap; justify-content:center; margin-top:1em;">
+                        <a href="../notes/mmop.pdf" class="project-link themed-btn">View Notes</a>
+                        <a href="https://scholar.google.co.in/citations?user=c8LNB4cAAAAJ&hl=en" class="project-link themed-btn" target="_blank">Prof. Justin David</a>
+                        <a href="../content/Arfken_Weber.pdf" class="project-link themed-btn" target="_blank">Books: Arfken & Weber</a>
+                        <a href="../content/Mathews_Walker.pdf" class="project-link themed-btn" target="_blank">Books: Mathews Walker</a>
+                        <a href="../content/Mary.pdf" class="project-link themed-btn" target="_blank">Books: Mary</a>
+                    </div>
+                </div>
+                <div class="research-card">
+                    <h3>Fundamentals of Astrophysics (PH217)</h3>
+                    <p>Course notes covering stellar structure, radiative processes, galactic dynamics, and observational techniques for PH217.</p>
+                    <div class="project-links" style="display:flex; gap:0.7em; flex-wrap:wrap; justify-content:center; margin-top:1em;">
+                        <a href="../content/Maoz.pdf" class="project-link themed-btn" target="_blank">View Notes</a>
+                        <a href="https://ui.adsabs.harvard.edu/" class="project-link themed-btn" target="_blank">ADS / Papers</a>
+                        <a href="../content/Maoz.pdf" class="project-link themed-btn" target="_blank">Book: Maoz</a>
+                    </div>
+                </div>
+
+                <div class="research-card">
+                    <h3>Quantum Cryptography & Communication (QT209)</h3>
+                    <p>Notes on quantum key distribution, quantum communication protocols, security proofs, and practical implementations.</p>
+                    <div class="project-links" style="display:flex; gap:0.7em; flex-wrap:wrap; justify-content:center; margin-top:1em;">
+                        <a href="../content/Quantum_optics.pdf" class="project-link themed-btn" target="_blank">View Notes (optics)</a>
+                        <a href="../content/Quantum_Communication.pdf" class="project-link themed-btn" target="_blank">View Notes (communication)</a>
+                        <a href="https://arxiv.org/search/?query=quantum+cryptography&searchtype=all" class="project-link themed-btn" target="_blank">Arxiv</a>
+                        <a href="../content/nielsen-chuang.pdf" class="project-link themed-btn" target="_blank">Book: Nielsen & Chuang</a>
+                        <a href="https://en.wikipedia.org/wiki/Quantum_key_distribution" class="project-link themed-btn" target="_blank">Overview: QKD</a>
+                    </div>
+                </div>
+                <div class="research-card">
+                    <h3>QFT on QC (HE381)</h3>
+                    <p>Notes and references on quantum field theory approaches applied to quantum computing.</p>
+                    <div class="project-links" style="display:flex; gap:0.7em; flex-wrap:wrap; justify-content:center; margin-top:1em;">
+                    <a href="../content/QFTQC.pdf" class="project-link themed-btn" target="_blank">View Notes</a>
+                        <a href="https://scholar.google.com/citations?user=-aNKuhIAAAAJ" class="project-link themed-btn" target="_blank">Prof. Aninda Sinha</a>
+                        <a href="../content/John_Preskill.pdf" class="project-link themed-btn" target="_blank">Arxiv: John Preskill</a>
+                        <a href="../content/Quantum_Field_Theory_and_the_Standard_Model_by_Schwartz_M.D.pdf" class="project-link themed-btn" target="_blank">Book: Schwartz</a>
+                        <a href="../content/R_Shankar.pdf" class="project-link themed-btn" target="_blank">Book: R Shankar</a>
+                    </div>
+                    </div>
+                </div></div>
+            </div>
+            <div class="soon-message" style="margin-top:2em; color:#888; font-style:italic; text-align:center;">
+                More notes coming soon. Stay tuned!
+            </div>
+                <!-- Books Modal -->
+        </div>
+    </section>
+    <script src="nav.js"></script>
+        <script>
+        // Books modal logic
+        // Fullscreen logic for book modal
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        const modalContent = document.getElementById('modalContent');
+    // ...existing code...
