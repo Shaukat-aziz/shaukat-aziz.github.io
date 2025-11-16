@@ -1,0 +1,14 @@
+{
+  "routes": [
+    {
+      "routePath": "/files/*",
+      "mountPath": "/files",
+      "method": "",
+      "module": [
+        "files/[...path].js:onRequest",
+        "files/index.js:onRequest"
+      ]
+    }
+  ],
+  "baseURL": "/"
+}
