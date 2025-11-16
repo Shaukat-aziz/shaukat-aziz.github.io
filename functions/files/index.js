@@ -11,8 +11,10 @@ export async function onRequest(context) {
     return new Response("Missing filename in /files/<path>", { status: 400 });
   }
 
-  // R2 key: content/<path>
-  const key = `content/${path}`;
+  // R2 key: optionally prefixed, default no prefix
+  // Use environment variable CONTENT_PREFIX if provided (do not include leading/trailing slashes)
+  const prefix = (env.CONTENT_PREFIX || "").replace(/^\/*|\/*$/g, "");
+  const key = prefix ? `${prefix}/${path}` : path;
 
   // R2 binding must be exactly "Files"
   const bucket = env.Files;
@@ -48,6 +50,9 @@ export async function onRequest(context) {
 
   // Cloudflare edge cache — safe for public files
   headers.set("Cache-Control", "public, max-age=3600, s-maxage=86400");
+
+  // Allow cross-origin requests for public assets (adjust if you need stricter CORS)
+  headers.set("Access-Control-Allow-Origin", "*");
 
   // Debug header so you KNOW function ran
   headers.set("X-Worker", "files-basic");
