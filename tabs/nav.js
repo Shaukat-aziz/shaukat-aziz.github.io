@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                             // Ensure favicon / tab icon exists (use relative path from tabs pages)
                             if (!document.querySelector('link[data-injected-favicon]')) {
-                                const faviconHref = 'https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/Logo.png';
+                                const faviconHref = '/files/Logo.png';
                                 const rels = [
                                     { rel: 'icon', sizes: '32x32' },
                                     { rel: 'icon', sizes: '16x16' },
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 const preloaderHTML = `
         <div id="preloader">
             <div class="preloader-inner">
-                <img src="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/Logo.png" alt="logo" class="preloader-logo">
+                <img src="/files/Logo.png" alt="logo" class="preloader-logo">
             </div>
         </div>`;
                                 const wrap = document.createElement('div');
