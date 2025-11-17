@@ -4,10 +4,7 @@
       "routePath": "/files/*",
       "mountPath": "/files",
       "method": "",
-      "module": [
-        "files/[...path].js:onRequest",
-        "files/index.js:onRequest"
-      ]
+      "module": ["files/index.js:onRequest"]
     }
   ],
   "baseURL": "/"

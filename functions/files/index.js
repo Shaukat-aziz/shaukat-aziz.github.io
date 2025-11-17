@@ -11,9 +11,12 @@ export async function onRequest(context) {
     return new Response("Missing filename in /files/<path>", { status: 400 });
   }
 
-  // R2 key: optionally prefixed, default no prefix
-  // Use environment variable CONTENT_PREFIX if provided (do not include leading/trailing slashes)
-  const prefix = (env.CONTENT_PREFIX || "").replace(/^\/*|\/*$/g, "");
+  // R2 key: optionally prefixed. Default to 'content' because the bucket
+  // itself is named `content` and objects are stored under a `content/` folder.
+  // If you explicitly set the Pages env var CONTENT_PREFIX to an empty
+  // string, that will be treated as unset and 'content' will be used.
+  const rawPrefix = (typeof env.CONTENT_PREFIX === 'string' && env.CONTENT_PREFIX.trim() !== '') ? env.CONTENT_PREFIX : 'content';
+  const prefix = (rawPrefix || '').replace(/^\/*|\/*$/g, "");
   const key = prefix ? `${prefix}/${path}` : path;
 
   // R2 binding must be exactly "Files"
