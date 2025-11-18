@@ -35,9 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>Get in touch for research collaborations, academic discussions, or any inquiries.</p>
             
                     <div class="contact-options">
-                        <a href="mailto:shaukataziz@atomicmail.io" class="contact-option">
+                        <a href="mailto:optimizer@atomicmail.io" class="contact-option">
                             <i class="fas fa-envelope"></i>
-                            <span>shaukataziz@atomicmail.io</span>
+                            <span>optimizer@atomicmail.io</span>
                         </a>
                 
                         <a href="https://t.me/shaukatazizzz" class="contact-option" target="_blank" rel="noopener noreferrer">
