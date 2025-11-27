@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DJVU Viewer</title>
+  <style>
+    html,body{height:100%;margin:0}
+    #viewer{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f5f5f5}
+    .notice{color:#666;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+    .fallback{padding:1em;background:#fff;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.08)}
+  </style>
+</head>
+<body>
+  <div id="viewer">
+    <div class="notice fallback">
+      <div id="status">Initializing DJVU viewer...</div>
+      <div id="download" style="margin-top:0.75em"></div>
+    </div>
+  </div>
+
+  <!-- Attempt to load djvu.js from a CDN. If this CDN doesn't match your preferred build, replace the URL below. -->
+  <script src="https://unpkg.com/djvujs@latest/build/djvu.min.js"></script>
+  <script>
+    (function(){
+      const params = new URLSearchParams(location.search);
+      const file = params.get('file');
+      const status = document.getElementById('status');
+      const download = document.getElementById('download');
+      if(!file){ status.textContent = 'No file provided.'; return; }
+      // Show download link as fallback
+      download.innerHTML = `<a href="${file}" target="_blank">Download DJVU</a>`;
+
+      // djvu.js exposes a global; attempt to initialize if available
+      function tryInit(){
+        try{
+          if(window.DJVU || window.DjVu || window.djvujs){
+            status.textContent = 'djvu library found — rendering...';
+            // Many builds provide a viewer URL helper — if available, use it in an iframe
+            // Otherwise, attempt document-based rendering if the library exposes an API.
+            const iframe = document.createElement('iframe');
+            iframe.style.border = 'none';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            // If the library supports a simple viewer page pattern, we can use it.
+            // Use an inline viewer page that uses the library again to avoid cross-origin.
+            const src = 'about:blank';
+            iframe.src = src;
+            document.getElementById('viewer').innerHTML = '';
+            document.getElementById('viewer').appendChild(iframe);
+            // write a small viewer bootstrap into the iframe that tries to use the same CDN script
+            const doc = iframe.contentWindow.document;
+            doc.open();
+            doc.write(`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{height:100%;margin:0}#root{width:100%;height:100%}</style></head><body><div id="root">Loading...</div><script src="https://unpkg.com/djvujs@latest/build/djvu.min.js"></script><script>const fileUrl=\"${file}\"; try{ if(window.DjVuViewer){ new DjVuViewer({container:document.getElementById(\'root\'), file: fileUrl}); } else if(window.DJVU){ /* custom builds */ console.warn('Found DJVU global, but automatic init is unknown for this build.'); document.getElementById('root').innerText='DJVU library loaded but automatic viewer init not implemented for this build.'; } else { document.getElementById('root').innerText='DJVU library not available in iframe.'; } }catch(e){ console.error(e); document.getElementById('root').innerText='Error rendering DJVU: '+e.message;}<\/script></body></html>`);
+            doc.close();
+            return true;
+          }
+        }catch(err){ console.warn('djvu init error',err); }
+        return false;
+      }
+
+      // Try a few times in case the CDN script is still loading
+      let attempts = 0;
+      const iv = setInterval(()=>{
+        attempts++;
+        if(tryInit() || attempts>6){ clearInterval(iv); if(attempts>6) status.textContent = 'Could not auto-render DJVU — use the download link below.'; }
+      }, 500);
+    })();
+  </script>
+</body>
+</html>
