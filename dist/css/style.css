@@ -1146,10 +1146,58 @@
     --theme-picker-glow: #FF1744;
 }
 
+.theme-picker-btn[data-theme-value="light"] {
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+    --theme-picker-glow: #94a3b8;
+}
+
+[data-theme="light"] html,
+html[data-theme="light"],
+[data-theme="light"] body {
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+    color: #0f172a;
+}
+
+[data-theme="light"] nav,
+[data-theme="light"] .mobile-menu {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(139, 0, 255, 0.2);
+}
+
+[data-theme="light"] .nav-links a,
+[data-theme="light"] .mobile-menu a,
+[data-theme="light"] .mobile-menu .close-btn i,
+[data-theme="light"] .content p,
+[data-theme="light"] .section p {
+    color: #334155;
+}
+
+[data-theme="light"] .section,
+[data-theme="light"] .project-card,
+[data-theme="light"] .research-card,
+[data-theme="light"] .education-item,
+[data-theme="light"] .dice-widget-card,
+[data-theme="light"] .announcement-panel {
+    background: rgba(255, 255, 255, 0.75);
+    border-color: rgba(139, 0, 255, 0.2);
+}
+
+[data-theme="light"] .social-icons a {
+    background: rgba(139, 0, 255, 0.08);
+}
+
+.tab-page-offset {
+    margin-top: 7rem;
+}
+
 /* Hide desktop theme picker on mobile views */
 @media (max-width: 768px) {
     nav .theme-picker-container {
         display: none !important;
+    }
+
+    .tab-page-offset {
+        margin-top: 6rem;
     }
 }
 
