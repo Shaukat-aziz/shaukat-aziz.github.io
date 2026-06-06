@@ -17,6 +17,22 @@ window.setTheme = function(theme) {
             btn.classList.remove('active');
         }
     });
+
+    window.updateThemeToggleButtons(theme);
+};
+
+window.updateThemeToggleButtons = function(theme) {
+    const activeTheme = theme || localStorage.getItem('site-theme') || 'default';
+    const isLight = activeTheme === 'light';
+    document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+        btn.textContent = isLight ? 'Dark' : 'Light';
+        btn.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
+    });
+};
+
+window.toggleLightTheme = function() {
+    const currentTheme = localStorage.getItem('site-theme') || 'default';
+    window.setTheme(currentTheme === 'light' ? 'default' : 'light');
 };
 
 // Coin Toss Widget Logic
