@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             // Ensure main script (js/script.js) is loaded on tab pages so handlers exist
                             if (!document.querySelector('script[data-main-script]')) {
                                 const s = document.createElement('script');
-                                s.src = '../js/script.js?v=1.0.1';
+                                s.src = '../js/script.js?v=1.0.2';
                                 s.setAttribute('data-main-script', '1');
                                 document.body.appendChild(s);
                             }
