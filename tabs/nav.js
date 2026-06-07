@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 const s = document.createElement('script');
                                 s.src = '../js/script.js?v=1.0.2';
                                 s.setAttribute('data-main-script', '1');
+                                s.onload = function() { var t = localStorage.getItem('site-theme') || 'default'; if (window.setTheme) window.setTheme(t); };
                                 document.body.appendChild(s);
                             }
 
