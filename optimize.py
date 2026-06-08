@@ -18,30 +18,58 @@ from pathlib import Path
 # Check for required packages
 try:
     import cssmin
+except ImportError:
+    subprocess.call([sys.executable, "-m", "pip", "install", "--break-system-packages", "cssmin"])
+    try:
+        import cssmin
+    except:
+        pass
+
+try:
     import jsmin
+except ImportError:
+    subprocess.call([sys.executable, "-m", "pip", "install", "--break-system-packages", "jsmin"])
+    try:
+        import jsmin
+    except:
+        pass
+
+try:
     import htmlmin
+except ImportError:
+    subprocess.call([sys.executable, "-m", "pip", "install", "--break-system-packages", "htmlmin"])
+    try:
+        import htmlmin
+    except:
+        pass
+
+try:
     from PIL import Image
 except ImportError:
-    print("Installing required packages...")
-    subprocess.call([sys.executable, "-m", "pip", "install", 
-                    "cssmin", "jsmin", "htmlmin", "pillow"])
-    import cssmin
-    import jsmin
-    import htmlmin
-    from PIL import Image
+    subprocess.call([sys.executable, "-m", "pip", "install", "--break-system-packages", "pillow"])
+    try:
+        from PIL import Image
+    except:
+        pass
 
 def minify_css(css_content):
     """Minify CSS content"""
-    return cssmin.cssmin(css_content)
+    if 'cssmin' in sys.modules:
+        return cssmin.cssmin(css_content)
+    return css_content
 
 def minify_js(js_content):
     """Minify JS content"""
-    return jsmin.jsmin(js_content)
+    if 'jsmin' in sys.modules:
+        return jsmin.jsmin(js_content)
+    return js_content
 
 def minify_html(html_content):
     """Minify HTML content"""
-    return htmlmin.minify(html_content, remove_comments=True, 
-                          remove_empty_space=True, remove_all_empty_space=False)
+    if 'htmlmin' in sys.modules:
+        return htmlmin.minify(html_content, remove_comments=True, 
+                              remove_empty_space=True, remove_all_empty_space=False)
+    return html_content
 
 def compress_image(img_path, quality=85):
     """Compress image file"""
@@ -67,10 +95,6 @@ def optimize_css_files(directory):
     css_files = glob.glob(os.path.join(directory, "**/*.css"), recursive=True)
     for css_file in css_files:
         print(f"Optimizing CSS: {css_file}")
-        # Create backup
-        backup_file = css_file + '.backup'
-        if not os.path.exists(backup_file):
-            shutil.copy2(css_file, backup_file)
         
         with open(css_file, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -85,19 +109,15 @@ def optimize_css_files(directory):
         # Calculate reduction
         original_size = len(content)
         minified_size = len(minified)
-        reduction = 100 - (minified_size / original_size * 100)
-        
-        print(f"  - Reduced by: {reduction:.1f}% ({original_size} → {minified_size} bytes)")
+        if original_size > 0:
+            reduction = 100 - (minified_size / original_size * 100)
+            print(f"  - Reduced by: {reduction:.1f}% ({original_size} → {minified_size} bytes)")
 
 def optimize_js_files(directory):
     """Find and optimize JS files"""
     js_files = glob.glob(os.path.join(directory, "**/*.js"), recursive=True)
     for js_file in js_files:
         print(f"Optimizing JS: {js_file}")
-        # Create backup
-        backup_file = js_file + '.backup'
-        if not os.path.exists(backup_file):
-            shutil.copy2(js_file, backup_file)
         
         with open(js_file, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -112,19 +132,15 @@ def optimize_js_files(directory):
         # Calculate reduction
         original_size = len(content)
         minified_size = len(minified)
-        reduction = 100 - (minified_size / original_size * 100)
-        
-        print(f"  - Reduced by: {reduction:.1f}% ({original_size} → {minified_size} bytes)")
+        if original_size > 0:
+            reduction = 100 - (minified_size / original_size * 100)
+            print(f"  - Reduced by: {reduction:.1f}% ({original_size} → {minified_size} bytes)")
 
 def optimize_html_files(directory):
     """Find and optimize HTML files"""
     html_files = glob.glob(os.path.join(directory, "**/*.html"), recursive=True)
     for html_file in html_files:
         print(f"Optimizing HTML: {html_file}")
-        # Create backup
-        backup_file = html_file + '.backup'
-        if not os.path.exists(backup_file):
-            shutil.copy2(html_file, backup_file)
         
         with open(html_file, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -139,9 +155,9 @@ def optimize_html_files(directory):
         # Calculate reduction
         original_size = len(content)
         minified_size = len(minified)
-        reduction = 100 - (minified_size / original_size * 100)
-        
-        print(f"  - Reduced by: {reduction:.1f}% ({original_size} → {minified_size} bytes)")
+        if original_size > 0:
+            reduction = 100 - (minified_size / original_size * 100)
+            print(f"  - Reduced by: {reduction:.1f}% ({original_size} → {minified_size} bytes)")
 
 def optimize_images(directory):
     """Find and optimize image files"""
@@ -153,7 +169,12 @@ def optimize_images(directory):
     
     for img_file in image_files:
         print(f"Optimizing image: {img_file}")
-        compress_image(img_file)
+        try:
+            img = Image.open(img_file)
+            img.save(img_file, optimize=True, quality=85)
+            print(f"  - Compressed: {img_file}")
+        except Exception as e:
+            print(f"  - Error compressing {img_file}: {e}")
 
 def find_and_suggest_improvements(directory):
     """Find potential areas for improvement"""
@@ -194,24 +215,37 @@ def find_and_suggest_improvements(directory):
 
 def main():
     root_dir = os.path.dirname(os.path.abspath(__file__))
-    print(f"Starting website optimization at: {root_dir}")
+    dist_dir = os.path.join(root_dir, "dist")
     
-    # Create backups directory
-    backup_dir = os.path.join(root_dir, "backups")
-    if not os.path.exists(backup_dir):
-        os.makedirs(backup_dir)
+    print(f"Building and optimizing website into: {dist_dir}")
     
-    # Run optimizations
-    optimize_css_files(root_dir)
-    optimize_js_files(root_dir)
-    optimize_html_files(root_dir)
-    optimize_images(root_dir)
+    # Create dist directory
+    if not os.path.exists(dist_dir):
+        os.makedirs(dist_dir)
+        
+    # Copy files to dist to avoid modifying source files
+    print("Copying files to dist directory...")
+    for item in ["css", "js", "tabs", "small_files", "content"]:
+        src = os.path.join(root_dir, item)
+        dst = os.path.join(dist_dir, item)
+        if os.path.exists(src):
+            if os.path.exists(dst):
+                shutil.rmtree(dst)
+            shutil.copytree(src, dst)
+            
+    for html_file in glob.glob(os.path.join(root_dir, "*.html")):
+        shutil.copy2(html_file, dist_dir)
+    
+    # Run optimizations on the dist directory
+    optimize_css_files(dist_dir)
+    optimize_js_files(dist_dir)
+    optimize_html_files(dist_dir)
+    optimize_images(dist_dir)
     
     # Find other potential improvements
-    find_and_suggest_improvements(root_dir)
+    find_and_suggest_improvements(dist_dir)
     
-    print("\nOptimization complete! Original files backed up with .backup extension")
-    print("To restore originals: find . -name '*.backup' -exec bash -c 'mv \"$1\" \"${1%.backup}\"' - '{}' \\;")
+    print("\nOptimization complete! Optimized files are ready in the 'dist' directory.")
 
 if __name__ == "__main__":
     main()

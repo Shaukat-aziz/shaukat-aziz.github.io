@@ -85,20 +85,8 @@ window.tossCoin = function() {
                 announcementIcon.style.color = isHeads ? "#FFD700" : "#C0C0C0";
             }
         }
-    }, 1200);
-    
-    // Reset back to shaukat photo after 5 seconds
-    setTimeout(() => {
-        coin.classList.remove('tossing-heads', 'tossing-tails');
-        if (announcementText) {
-            announcementText.textContent = "Click the portrait to toss a coin, or the dice to roll!";
-            if (announcementIcon) {
-                announcementIcon.className = "fas fa-bullhorn announcement-icon";
-                announcementIcon.style.color = "#00E676";
-            }
-        }
         isTossing = false;
-    }, 5000);
+    }, 1200);
 };
 
 // Dice Rolling Widget Logic
@@ -127,9 +115,9 @@ window.rollDice = function() {
     };
     
     // Add multiple crazy spins
-    const spins = 3; // 3 full turns
-    const targetX = faceRotations[result].x + (spins * 360);
-    const targetY = faceRotations[result].y + (spins * 360);
+    window.diceSpins = (window.diceSpins || 0) + 3; // 3 full turns
+    const targetX = faceRotations[result].x + (window.diceSpins * 360);
+    const targetY = faceRotations[result].y + (window.diceSpins * 360);
     
     dice.style.transform = `rotateX(${targetX}deg) rotateY(${targetY}deg)`;
     
@@ -150,20 +138,8 @@ window.rollDice = function() {
                 announcementIcon.style.color = "#00E676";
             }
         }
-    }, 1500);
-    
-    // Reset dice rotation after 6 seconds
-    setTimeout(() => {
-        dice.style.transform = 'rotateX(20deg) rotateY(20deg)';
-        if (announcementText) {
-            announcementText.textContent = "Click the portrait to toss a coin, or the dice to roll!";
-            if (announcementIcon) {
-                announcementIcon.className = "fas fa-bullhorn announcement-icon";
-                announcementIcon.style.color = "#00E676";
-            }
-        }
         isRolling = false;
-    }, 6000);
+    }, 1500);
 };
 
 // Accordion Toggle function
@@ -211,7 +187,14 @@ function openCVViewModal() {
     const frame = document.getElementById('cvViewFrame');
     if (!modal || !frame) return;
 
-    frame.src = 'https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/shaukat_cv.pdf';
+    const pdfUrl = 'https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/shaukat_cv.pdf';
+    const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        frame.src = `https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true`;
+    } else {
+        frame.src = pdfUrl;
+    }
 
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
