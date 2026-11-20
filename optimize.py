@@ -1,251 +1,231 @@
 #!/usr/bin/env python3
-"""
-Website Optimizer - Performs various optimizations on web assets
-- Minifies CSS, JS, and HTML
-- Optimizes images
-- Validates HTML
-- Checks for dead links
+"""Zero-dependency Netlify static site builder & integrity validator.
+
+Builds the production `dist/` directory using Python 3 standard library only:
+- Copies public directories (`css`, `js`, `tabs`, `small_files`, `assets`)
+  and root public files (`index.html`, `404.html`, `robots.txt`, `sitemap.xml`, `site.webmanifest`).
+- Losslessly minifies CSS (strips comments outside strings & collapses whitespace).
+- Safely cleans HTML (removes HTML comments and redundant blank lines while preserving
+  inline <script>, <style>, <pre>, and <svg> blocks verbatim).
+- Copies JS and binary assets untouched so image/script integrity is guaranteed.
+- Audits every HTML page in `dist/` to ensure all local relative `href`/`src`
+  targets resolve to real, non-zero-byte files inside `dist/`.
 """
 
-import os
-import re
-import sys
-import glob
-import subprocess
-import shutil
+from html.parser import HTMLParser
 from pathlib import Path
+import re
+import shutil
+import sys
+from urllib.parse import urlparse
 
-# Check for required packages
-try:
-    import cssmin
-except ImportError:
-    subprocess.call([sys.executable, "-m", "pip", "install", "--break-system-packages", "cssmin"])
-    try:
-        import cssmin
-    except:
-        pass
 
-try:
-    import jsmin
-except ImportError:
-    subprocess.call([sys.executable, "-m", "pip", "install", "--break-system-packages", "jsmin"])
-    try:
-        import jsmin
-    except:
-        pass
+PUBLIC_DIRS = ("css", "js", "tabs", "small_files", "assets")
+PUBLIC_ROOT_FILES = ("index.html", "404.html", "robots.txt", "sitemap.xml", "site.webmanifest")
+SKIP_NAMES = {".gitkeep", ".DS_Store", "Thumbs.db"}
 
-try:
-    import htmlmin
-except ImportError:
-    subprocess.call([sys.executable, "-m", "pip", "install", "--break-system-packages", "htmlmin"])
-    try:
-        import htmlmin
-    except:
-        pass
 
-try:
-    from PIL import Image
-except ImportError:
-    subprocess.call([sys.executable, "-m", "pip", "install", "--break-system-packages", "pillow"])
-    try:
-        from PIL import Image
-    except:
-        pass
+def minify_css(css_text: str) -> str:
+    """Losslessly strip CSS comments (outside quoted strings) and excess whitespace."""
+    out = []
+    i = 0
+    n = len(css_text)
+    in_quote = None
 
-def minify_css(css_content):
-    """Minify CSS content"""
-    if 'cssmin' in sys.modules:
-        return cssmin.cssmin(css_content)
-    return css_content
+    while i < n:
+        ch = css_text[i]
+        if in_quote:
+            out.append(ch)
+            if ch == "\\" and i + 1 < n:
+                out.append(css_text[i + 1])
+                i += 2
+                continue
+            if ch == in_quote:
+                in_quote = None
+            i += 1
+        elif ch in ('"', "'"):
+            in_quote = ch
+            out.append(ch)
+            i += 1
+        elif ch == "/" and i + 1 < n and css_text[i + 1] == "*":
+            end = css_text.find("*/", i + 2)
+            if end == -1:
+                break
+            i = end + 2
+        else:
+            out.append(ch)
+            i += 1
 
-def minify_js(js_content):
-    """Minify JS content"""
-    if 'jsmin' in sys.modules:
-        return jsmin.jsmin(js_content)
-    return js_content
+    stripped = "".join(out)
+    # Collapse runs of whitespace/newlines cleanly without breaking CSS calc()/spaces
+    lines = [re.sub(r"[ \t]+", " ", line).strip() for line in stripped.splitlines()]
+    compact = "\n".join(line for line in lines if line)
+    return compact + "\n"
 
-def minify_html(html_content):
-    """Minify HTML content"""
-    if 'htmlmin' in sys.modules:
-        return htmlmin.minify(html_content, remove_comments=True, 
-                              remove_empty_space=True, remove_all_empty_space=False)
-    return html_content
 
-def compress_image(img_path, quality=85):
-    """Compress image file"""
-    try:
-        img = Image.open(img_path)
-        
-        # Create backup
-        backup_path = img_path + '.backup'
-        if not os.path.exists(backup_path):
-            shutil.copy2(img_path, backup_path)
-        
-        # Save with compression
-        img.save(img_path, optimize=True, quality=quality)
-        print(f"Compressed: {img_path}")
-        
+def clean_html(html_text: str) -> str:
+    """Strip HTML comments and empty lines while keeping <script>/<style>/<pre>/<svg> verbatim."""
+    protected_blocks = []
+    pattern = re.compile(r"(<(?:script|style|pre|svg)\b[^>]*>.*?</(?:script|style|pre|svg)>)", re.IGNORECASE | re.DOTALL)
+
+    def _stash(match: re.Match) -> str:
+        idx = len(protected_blocks)
+        protected_blocks.append(match.group(1))
+        return f"__PROTECTED_BLOCK_{idx}__"
+
+    working = pattern.sub(_stash, html_text)
+    # Remove HTML comments (outside protected blocks)
+    working = re.sub(r"<!--(?!\[if).*?-->", "", working, flags=re.DOTALL)
+    # Collapse blank lines outside protected blocks
+    lines = [line.rstrip() for line in working.splitlines() if line.strip()]
+    working = "\n".join(lines) + "\n"
+
+    for idx, block in enumerate(protected_blocks):
+        working = working.replace(f"__PROTECTED_BLOCK_{idx}__", block)
+
+    return working
+
+
+class AssetLinkAuditor(HTMLParser):
+    """Collects local href/src references from built HTML documents."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.refs: list[tuple[str, str]] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        for attr_name, attr_val in attrs:
+            if attr_name in ("href", "src") and attr_val:
+                self.refs.append((attr_name, attr_val.strip()))
+
+
+def is_external_or_virtual(url: str) -> bool:
+    if not url or url.startswith(("#", "mailto:", "tel:", "javascript:", "data:")):
         return True
-    except Exception as e:
-        print(f"Error compressing {img_path}: {e}")
-        return False
+    parsed = urlparse(url)
+    return bool(parsed.scheme or parsed.netloc)
 
-def optimize_css_files(directory):
-    """Find and optimize CSS files"""
-    css_files = glob.glob(os.path.join(directory, "**/*.css"), recursive=True)
-    for css_file in css_files:
-        print(f"Optimizing CSS: {css_file}")
-        
-        with open(css_file, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        # Minify content
-        minified = minify_css(content)
-        
-        # Write minified content
-        with open(css_file, 'w', encoding='utf-8') as f:
-            f.write(minified)
-        
-        # Calculate reduction
-        original_size = len(content)
-        minified_size = len(minified)
-        if original_size > 0:
-            reduction = 100 - (minified_size / original_size * 100)
-            print(f"  - Reduced by: {reduction:.1f}% ({original_size} → {minified_size} bytes)")
 
-def optimize_js_files(directory):
-    """Find and optimize JS files"""
-    js_files = glob.glob(os.path.join(directory, "**/*.js"), recursive=True)
-    for js_file in js_files:
-        print(f"Optimizing JS: {js_file}")
-        
-        with open(js_file, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        # Minify content
-        minified = minify_js(content)
-        
-        # Write minified content
-        with open(js_file, 'w', encoding='utf-8') as f:
-            f.write(minified)
-        
-        # Calculate reduction
-        original_size = len(content)
-        minified_size = len(minified)
-        if original_size > 0:
-            reduction = 100 - (minified_size / original_size * 100)
-            print(f"  - Reduced by: {reduction:.1f}% ({original_size} → {minified_size} bytes)")
+def copy_public_tree(root_dir: Path, dist_dir: Path) -> None:
+    if dist_dir.exists():
+        shutil.rmtree(dist_dir)
+    dist_dir.mkdir(parents=True, exist_ok=True)
 
-def optimize_html_files(directory):
-    """Find and optimize HTML files"""
-    html_files = glob.glob(os.path.join(directory, "**/*.html"), recursive=True)
-    for html_file in html_files:
-        print(f"Optimizing HTML: {html_file}")
-        
-        with open(html_file, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        # Minify content
-        minified = minify_html(content)
-        
-        # Write minified content
-        with open(html_file, 'w', encoding='utf-8') as f:
-            f.write(minified)
-        
-        # Calculate reduction
-        original_size = len(content)
-        minified_size = len(minified)
-        if original_size > 0:
-            reduction = 100 - (minified_size / original_size * 100)
-            print(f"  - Reduced by: {reduction:.1f}% ({original_size} → {minified_size} bytes)")
+    for folder in PUBLIC_DIRS:
+        src_folder = root_dir / folder
+        if not src_folder.exists():
+            continue
+        dst_folder = dist_dir / folder
+        shutil.copytree(
+            src_folder,
+            dst_folder,
+            ignore=lambda _dir, names: [
+                name for name in names if name in SKIP_NAMES or name.startswith(".") or name.endswith(".backup")
+            ],
+        )
 
-def optimize_images(directory):
-    """Find and optimize image files"""
-    img_extensions = ['.jpg', '.jpeg', '.png', '.webp']
-    image_files = []
-    
-    for ext in img_extensions:
-        image_files.extend(glob.glob(os.path.join(directory, f"**/*{ext}"), recursive=True))
-    
-    for img_file in image_files:
-        print(f"Optimizing image: {img_file}")
-        try:
-            img = Image.open(img_file)
-            img.save(img_file, optimize=True, quality=85)
-            print(f"  - Compressed: {img_file}")
-        except Exception as e:
-            print(f"  - Error compressing {img_file}: {e}")
+    for filename in PUBLIC_ROOT_FILES:
+        src_file = root_dir / filename
+        if src_file.exists():
+            shutil.copy2(src_file, dist_dir / filename)
 
-def find_and_suggest_improvements(directory):
-    """Find potential areas for improvement"""
-    print("\nSuggested Improvements:")
-    
-    # Check for inline styles in HTML files
-    html_files = glob.glob(os.path.join(directory, "**/*.html"), recursive=True)
-    inline_styles_found = False
-    for html_file in html_files:
-        with open(html_file, 'r', encoding='utf-8') as f:
-            content = f.read()
-            if 'style="' in content:
-                print(f"- Found inline styles in {html_file} - Consider moving to external CSS")
-                inline_styles_found = True
-    
-    if not inline_styles_found:
-        print("- No inline styles found - Good practice!")
-    
-    # Check for render-blocking resources
-    js_in_head = False
-    for html_file in html_files:
-        with open(html_file, 'r', encoding='utf-8') as f:
-            content = f.read()
-            head_section = re.search(r'<head>.*?</head>', content, re.DOTALL)
-            if head_section and '<script' in head_section.group(0) and not 'async' in head_section.group(0):
-                print(f"- Found render-blocking scripts in <head> in {html_file} - Consider adding 'async' or 'defer'")
-                js_in_head = True
-    
-    if not js_in_head:
-        print("- No render-blocking scripts found - Good practice!")
-    
-    # Check for large CSS/JS files
-    css_files = glob.glob(os.path.join(directory, "**/*.css"), recursive=True)
-    for css_file in css_files:
-        size = os.path.getsize(css_file)
-        if size > 50000:  # 50KB
-            print(f"- Large CSS file detected: {css_file} ({size/1024:.1f} KB) - Consider breaking into smaller files")
 
-def main():
-    root_dir = os.path.dirname(os.path.abspath(__file__))
-    dist_dir = os.path.join(root_dir, "dist")
-    
-    print(f"Building and optimizing website into: {dist_dir}")
-    
-    # Create dist directory
-    if not os.path.exists(dist_dir):
-        os.makedirs(dist_dir)
-        
-    # Copy files to dist to avoid modifying source files
-    print("Copying files to dist directory...")
-    for item in ["css", "js", "tabs", "small_files", "content"]:
-        src = os.path.join(root_dir, item)
-        dst = os.path.join(dist_dir, item)
-        if os.path.exists(src):
-            if os.path.exists(dst):
-                shutil.rmtree(dst)
-            shutil.copytree(src, dst)
-            
-    for html_file in glob.glob(os.path.join(root_dir, "*.html")):
-        shutil.copy2(html_file, dist_dir)
-    
-    # Run optimizations on the dist directory
-    optimize_css_files(dist_dir)
-    optimize_js_files(dist_dir)
-    optimize_html_files(dist_dir)
-    optimize_images(dist_dir)
-    
-    # Find other potential improvements
-    find_and_suggest_improvements(dist_dir)
-    
-    print("\nOptimization complete! Optimized files are ready in the 'dist' directory.")
+def process_assets(dist_dir: Path) -> tuple[int, int, list[tuple[str, int, int]]]:
+    report: list[tuple[str, int, int]] = []
+    total_before = 0
+    total_after = 0
+
+    for path in sorted(dist_dir.rglob("*")):
+        if not path.is_file():
+            continue
+        rel = path.relative_to(dist_dir).as_posix()
+        raw_bytes = path.read_bytes()
+        before = len(raw_bytes)
+
+        if path.suffix.lower() == ".css":
+            cleaned = minify_css(raw_bytes.decode("utf-8"))
+            path.write_text(cleaned, encoding="utf-8", newline="\n")
+        elif path.suffix.lower() == ".html":
+            cleaned = clean_html(raw_bytes.decode("utf-8"))
+            path.write_text(cleaned, encoding="utf-8", newline="\n")
+        elif path.suffix.lower() == ".js":
+            # Trim trailing whitespace per line only — never mutate regexes or literals
+            text = raw_bytes.decode("utf-8")
+            trimmed = "\n".join(line.rstrip() for line in text.splitlines()) + "\n"
+            path.write_text(trimmed, encoding="utf-8", newline="\n")
+
+        after = path.stat().st_size
+        total_before += before
+        total_after += after
+        report.append((rel, before, after))
+
+    return total_before, total_after, report
+
+
+def audit_dist(dist_dir: Path) -> list[str]:
+    errors: list[str] = []
+
+    # Check zero-byte files in dist
+    for path in sorted(dist_dir.rglob("*")):
+        if path.is_file() and path.stat().st_size == 0:
+            errors.append(f"Zero-byte file in dist: {path.relative_to(dist_dir).as_posix()}")
+
+    # Verify all relative links/assets in every HTML page
+    for html_file in sorted(dist_dir.rglob("*.html")):
+        auditor = AssetLinkAuditor()
+        auditor.feed(html_file.read_text(encoding="utf-8"))
+        rel_html = html_file.relative_to(dist_dir).as_posix()
+
+        for attr, ref in auditor.refs:
+            if is_external_or_virtual(ref):
+                continue
+            clean_ref = ref.split("#", 1)[0].split("?", 1)[0]
+            if not clean_ref:
+                continue
+
+            if clean_ref.startswith("/"):
+                target = dist_dir / clean_ref.lstrip("/")
+            else:
+                target = (html_file.parent / clean_ref).resolve()
+
+            try:
+                target.relative_to(dist_dir.resolve())
+            except ValueError:
+                errors.append(f"{rel_html}: {attr}='{ref}' resolves outside dist/")
+                continue
+
+            if clean_ref == "/":
+                target = dist_dir / "index.html"
+
+            if not target.exists():
+                errors.append(f"{rel_html}: broken {attr}='{ref}' -> missing {target}")
+
+    return errors
+
+
+def main() -> int:
+    root_dir = Path(__file__).resolve().parent
+    dist_dir = root_dir / "dist"
+
+    print(f"Building Netlify distribution in: {dist_dir}")
+    copy_public_tree(root_dir, dist_dir)
+    before, after, report = process_assets(dist_dir)
+    errors = audit_dist(dist_dir)
+
+    print(f"\nProcessed {len(report)} files ({before:,} -> {after:,} bytes):")
+    for rel, b, a in report:
+        pct = (100.0 * (b - a) / b) if b else 0.0
+        print(f"  - {rel:<34} {b:>8,} -> {a:>8,} bytes ({pct:>4.1f}% saved)")
+
+    if errors:
+        print("\nBuild audit FAILED:", file=sys.stderr)
+        for err in errors:
+            print(f"  [ERROR] {err}", file=sys.stderr)
+        return 1
+
+    print("\nAudit PASSED: all relative links and assets verified in dist/.")
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

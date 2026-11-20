@@ -1,0 +1,23 @@
+{
+  "name": "Shaukat Aziz — Physics & Innovation",
+  "short_name": "Shaukat Aziz",
+  "description": "Academic portfolio, research projects, and physics notes of Shaukat Aziz (IISc Bangalore).",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a1a",
+  "theme_color": "#0a0a1a",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

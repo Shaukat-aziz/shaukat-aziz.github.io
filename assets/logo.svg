@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Shaukat Aziz Quantum Physics Logo">
+  <defs>
+    <linearGradient id="quantumOrbitA" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B00FF" />
+      <stop offset="50%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+    <linearGradient id="quantumOrbitB" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#8B00FF" />
+    </linearGradient>
+    <radialGradient id="quantumCoreGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c084fc" stop-opacity="0.5" />
+      <stop offset="65%" stop-color="#8B00FF" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#8B00FF" stop-opacity="0" />
+    </radialGradient>
+    <filter id="electronGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="1.8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Outer phase dial ring & 12 precision ticks -->
+  <circle cx="50" cy="50" r="45" fill="none" stroke="url(#quantumOrbitA)" stroke-width="1.2" stroke-opacity="0.45" stroke-dasharray="4 3" />
+  <g stroke="#c084fc" stroke-linecap="round" opacity="0.65">
+    <line x1="96" y1="50" x2="92.5" y2="50" stroke-width="1.5" />
+    <line x1="89.84" y1="73" x2="87.67" y2="71.75" stroke-width="1.1" />
+    <line x1="73" y1="89.84" x2="71.75" y2="87.67" stroke-width="1.1" />
+    <line x1="50" y1="96" x2="50" y2="92.5" stroke-width="1.5" />
+    <line x1="27" y1="89.84" x2="28.25" y2="87.67" stroke-width="1.1" />
+    <line x1="10.16" y1="73" x2="12.33" y2="71.75" stroke-width="1.1" />
+    <line x1="4" y1="50" x2="7.5" y2="50" stroke-width="1.5" />
+    <line x1="10.16" y1="27" x2="12.33" y2="28.25" stroke-width="1.1" />
+    <line x1="27" y1="10.16" x2="28.25" y2="12.33" stroke-width="1.1" />
+    <line x1="50" y1="4" x2="50" y2="7.5" stroke-width="1.5" />
+    <line x1="73" y1="10.16" x2="71.75" y2="12.33" stroke-width="1.1" />
+    <line x1="89.84" y1="27" x2="87.67" y2="28.25" stroke-width="1.1" />
+  </g>
+
+  <!-- Central quantum field halo -->
+  <circle cx="50" cy="50" r="24" fill="url(#quantumCoreGlow)" />
+
+  <!-- 3 symmetrically tilted elliptical quantum orbitals + orbiting nodes -->
+  <g>
+    <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="url(#quantumOrbitA)" stroke-width="2.1" />
+    <circle cx="87.59" cy="44.87" r="3.1" fill="#38bdf8" filter="url(#electronGlow)" />
+  </g>
+  <g transform="rotate(60 50 50)">
+    <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="url(#quantumOrbitB)" stroke-width="2.1" />
+    <circle cx="15.36" cy="57.50" r="3.1" fill="#c084fc" filter="url(#electronGlow)" />
+  </g>
+  <g transform="rotate(-60 50 50)">
+    <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="url(#quantumOrbitA)" stroke-width="2.1" />
+    <circle cx="33.10" cy="36.41" r="3.1" fill="#f8fafc" filter="url(#electronGlow)" />
+  </g>
+
+  <!-- Central nucleus badge & geometric Dirac Psi (Ψ) -->
+  <circle cx="50" cy="50" r="14" fill="#0d0b24" fill-opacity="0.92" stroke="url(#quantumOrbitA)" stroke-width="1.6" />
+  <g fill="none" stroke="#f8fafc" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="50" y1="39.5" x2="50" y2="60.5" />
+    <line x1="46.5" y1="39.5" x2="53.5" y2="39.5" />
+    <line x1="46.5" y1="60.5" x2="53.5" y2="60.5" />
+    <path d="M40.5 43 C40.5 51 44.2 53.5 50 53.5 C55.8 53.5 59.5 51 59.5 43" />
+    <line x1="38.5" y1="43" x2="42" y2="43" />
+    <line x1="58" y1="43" x2="61.5" y2="43" />
+  </g>
+</svg>

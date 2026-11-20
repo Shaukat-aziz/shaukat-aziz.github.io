@@ -1,13 +1,19 @@
 {
-  "name": "main-website",
-  "version": "1.0.0",
-  "description": "Personal academic website",
-  "main": "index.js",
+  "name": "shaukataziz-portfolio",
+  "version": "2.0.0",
+  "description": "Personal academic physics portfolio of Shaukat Aziz",
+  "homepage": "https://shaukataziz.vip",
   "scripts": {
-    "build": "echo 'No build step configured, just copying files.' && mkdir -p dist && cp -r *.html css js tabs content dist/ || true",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "python3 optimize.py",
+    "dev": "python3 -m http.server 8080"
   },
-  "keywords": [],
+  "keywords": [
+    "physics",
+    "quantum computing",
+    "computational physics",
+    "portfolio",
+    "IISc"
+  ],
   "author": "Shaukat Aziz",
   "license": "ISC"
 }

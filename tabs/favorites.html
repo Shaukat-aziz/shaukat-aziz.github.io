@@ -3,169 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites — Open Source Projects &amp; Inspirations | Shaukat Aziz</title>
+    <meta name="description" content="Shaukat Aziz's favorite open-source software, tools for privacy and productivity, and open-access pioneers.">
+    <meta name="author" content="Shaukat Aziz">
+    <link rel="canonical" href="https://shaukataziz.vip/tabs/favorites.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shaukataziz.vip/tabs/favorites.html">
+    <meta property="og:title" content="Favorites — Open Source Projects | Shaukat Aziz">
+    <meta property="og:description" content="Curated favorite open-source projects, privacy tools, and inspirations.">
+    <meta property="og:image" content="https://shaukataziz.vip/small_files/shaukat1.jpg">
+    <meta name="theme-color" content="#070714">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
     <script>
-        (function() {
-            const savedTheme = localStorage.getItem('site-theme') || 'default';
-            if (savedTheme !== 'default') {
-                document.documentElement.setAttribute('data-theme', savedTheme);
-            }
+        (function () {
+            try {
+                var savedTheme = localStorage.getItem('site-theme') || 'default';
+                if (savedTheme !== 'default') {
+                    document.documentElement.setAttribute('data-theme', savedTheme);
+                }
+                if (savedTheme === 'light') {
+                    var tc = document.querySelector('meta[name="theme-color"]');
+                    if (tc) tc.setAttribute('content', '#f8fafc');
+                }
+            } catch (_) {}
         })();
     </script>
-    <link rel="stylesheet" href="../css/style.css?v=1.0.2">
-    <title>Favorites - Open Source Projects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css?v=2.0.0">
 </head>
 <body>
-    <div id="navbar"></div>
-    <section class="section">
-        <div class="section-container">
-            <h2 style="margin-top: 80px;">Favorite Open Source Projects</h2>
-            <p style="margin-bottom: 2rem; color: var(--text-color); opacity: 0.8;">I strongly support and promote the usage of open-source software. Here are some of my favorite projects that I highly recommend for privacy, security, and productivity.</p>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                        <img src="https://github.com/namidaco.png" alt="Namida Logo" style="width: 40px; height: 40px; margin-right: 12px; border-radius: 8px;">
-                        <h3 style="margin: 0;">Namida Player</h3>
+    <div class="background-elements" aria-hidden="true"></div>
+    <header id="navbar"></header>
+
+    <main>
+        <section class="section tab-page-offset">
+            <div class="section-container">
+                <h2>Favorite Open Source Projects</h2>
+                <p style="margin-bottom: 2rem; text-align: center;">I strongly support and promote the usage of open-source software. Here are some of my favorite projects that I highly recommend for privacy, security, and productivity.</p>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <img src="https://github.com/namidaco.png" alt="Namida Logo" width="40" height="40" loading="lazy" decoding="async" style="width: 40px; height: 40px; margin-right: 12px; border-radius: 8px;">
+                                <h3 style="margin: 0;">Namida Player</h3>
+                            </div>
+                            <p>A beautifully designed, feature-rich, open-source music and video player for Android.</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/namidaco/namida" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                            <a href="#" id="namida-download" target="_blank" rel="noopener noreferrer" class="project-link" style="display: none;">Loading APK...</a>
+                        </div>
                     </div>
-                    <p>A beautifully designed, feature-rich, open-source music and video player for Android.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/namidaco/namida" target="_blank" class="project-link">GitHub</a>
-                        <a href="#" id="namida-download" target="_blank" class="project-link" style="display: none; background: rgba(139, 0, 255, 0.2);">Loading APK...</a>
+
+                    <div class="project-card">
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <img src="https://cdn.simpleicons.org/onlyoffice" alt="ONLYOFFICE Logo" width="40" height="40" loading="lazy" decoding="async" style="width: 40px; height: 40px; margin-right: 12px;">
+                                <h3 style="margin: 0;">ONLYOFFICE</h3>
+                            </div>
+                            <p>A powerful and secure open-source office suite for collaborative work and document editing.</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://www.onlyoffice.com/" target="_blank" rel="noopener noreferrer" class="project-link">Website</a>
+                            <a href="https://github.com/ONLYOFFICE/DesktopEditors" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.onlyoffice.documents" target="_blank" rel="noopener noreferrer" class="project-link">Play Store</a>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="project-card">
-                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                        <img src="https://cdn.simpleicons.org/onlyoffice" alt="ONLYOFFICE Logo" style="width: 40px; height: 40px; margin-right: 12px;">
-                        <h3 style="margin: 0;">ONLYOFFICE</h3>
+
+                    <div class="project-card">
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <img src="https://cdn.simpleicons.org/bitwarden" alt="Bitwarden Logo" width="40" height="40" loading="lazy" decoding="async" style="width: 40px; height: 40px; margin-right: 12px;">
+                                <h3 style="margin: 0;">Bitwarden</h3>
+                            </div>
+                            <p>A secure, open-source password manager that keeps your credentials safe across all devices.</p>
+                            <p style="font-size: 0.9em; margin-top: 10px;"><em>Tip:</em> Use self-hosting or community instances like <a href="https://vault.vaultwarden.uk" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color);">Vaultwarden.uk</a> or <a href="https://bitwarden.garudalinux.org" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color);">Garuda's Hosting</a> to access premium features (like 2FA authenticator built-in) for free.</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://bitwarden.com/" target="_blank" rel="noopener noreferrer" class="project-link">Website</a>
+                            <a href="https://github.com/bitwarden/mobile" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.x8bit.bitwarden" target="_blank" rel="noopener noreferrer" class="project-link">Play Store</a>
+                        </div>
                     </div>
-                    <p>A powerful and secure open-source office suite for collaborative work and document editing.</p>
-                    <div class="project-links">
-                        <a href="https://www.onlyoffice.com/" target="_blank" class="project-link">Website</a>
-                        <a href="https://github.com/ONLYOFFICE/DesktopEditors" target="_blank" class="project-link">GitHub</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.onlyoffice.documents" target="_blank" class="project-link">Play Store</a>
+
+                    <div class="project-card">
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <img src="https://cdn.simpleicons.org/tailscale" alt="Tailscale Logo" width="40" height="40" loading="lazy" decoding="async" style="width: 40px; height: 40px; margin-right: 12px;">
+                                <h3 style="margin: 0;">Tailscale</h3>
+                            </div>
+                            <p>A zero-config VPN built on WireGuard, making secure networking easy and accessible.</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://tailscale.com/" target="_blank" rel="noopener noreferrer" class="project-link">Website</a>
+                            <a href="https://github.com/tailscale/tailscale-android" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.tailscale.ipn" target="_blank" rel="noopener noreferrer" class="project-link">Play Store</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <img src="https://cdn.simpleicons.org/duckduckgo" alt="DuckDuckGo Logo" width="40" height="40" loading="lazy" decoding="async" style="width: 40px; height: 40px; margin-right: 12px;">
+                                <h3 style="margin: 0;">DuckDuckGo</h3>
+                            </div>
+                            <p>A privacy-focused search engine with open-source apps and extensions that protect you from tracking.</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://duckduckgo.com/" target="_blank" rel="noopener noreferrer" class="project-link">Website</a>
+                            <a href="https://github.com/duckduckgo/Android" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.duckduckgo.mobile.android" target="_blank" rel="noopener noreferrer" class="project-link">Play Store</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <img src="https://github.com/meetrevision.png" alt="ReviOS Logo" width="40" height="40" loading="lazy" decoding="async" style="width: 40px; height: 40px; margin-right: 12px; border-radius: 8px;">
+                                <h3 style="margin: 0;">ReviOS</h3>
+                            </div>
+                            <p>An open-source custom playbook for Windows that strips telemetry, removes bloatware, and significantly improves system performance and privacy.</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://revi.cc/" target="_blank" rel="noopener noreferrer" class="project-link">Website</a>
+                            <a href="https://github.com/meetrevision/playbook" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <img src="https://avatars.githubusercontent.com/readest" alt="Readest Logo" width="40" height="40" loading="lazy" decoding="async" style="width: 40px; height: 40px; margin-right: 12px; border-radius: 8px;">
+                                <h3 style="margin: 0;">Readest</h3>
+                            </div>
+                            <p>An open-source e-book reader app with a clean reading experience and support for modern book formats.</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://readest.com" target="_blank" rel="noopener noreferrer" class="project-link">Website</a>
+                            <a href="https://github.com/readest/readest" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.bilingify.readest" target="_blank" rel="noopener noreferrer" class="project-link">Play Store</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <img src="https://www.google.com/s2/favicons?domain=psiphon.ca&sz=128" alt="Psiphon Pro Logo" width="40" height="40" loading="lazy" decoding="async" style="width: 40px; height: 40px; margin-right: 12px; border-radius: 8px;">
+                                <h3 style="margin: 0;">Psiphon Pro</h3>
+                            </div>
+                            <p>An open-source censorship-circumvention VPN app that helps users securely access the open internet from restricted networks.</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://psiphon.ca/en/download.html" target="_blank" rel="noopener noreferrer" class="project-link">Website</a>
+                            <a href="https://github.com/Psiphon-Inc/psiphon-android" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.psiphon3.subscription" target="_blank" rel="noopener noreferrer" class="project-link">Play Store</a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                        <img src="https://cdn.simpleicons.org/bitwarden" alt="Bitwarden Logo" style="width: 40px; height: 40px; margin-right: 12px;">
-                        <h3 style="margin: 0;">Bitwarden</h3>
+                <h2 style="margin-top: 60px;">Favorite Closed Source Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <img src="https://www.google.com/s2/favicons?domain=videosoftdev.com&sz=128" alt="VSDC Logo" width="40" height="40" loading="lazy" decoding="async" style="width: 40px; height: 40px; margin-right: 12px; border-radius: 8px;">
+                                <h3 style="margin: 0;">VSDC Free Video Editor</h3>
+                            </div>
+                            <p>A highly capable, free non-linear video editing suite with advanced tools, color correction, and hardware acceleration.</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://www.videosoftdev.com/" target="_blank" rel="noopener noreferrer" class="project-link">Website</a>
+                        </div>
                     </div>
-                    <p>A secure, open-source password manager that keeps your credentials safe across all devices.</p>
-                    <p style="font-size: 0.9em; margin-top: 10px;"><em>Tip:</em> Use self-hosting or community instances like <a href="https://vault.vaultwarden.uk" target="_blank" style="color: var(--primary-color);">Vaultwarden.uk</a> or <a href="https://bitwarden.garudalinux.org" target="_blank" style="color: var(--primary-color);">Garuda's Hosting</a> to access premium features (like 2FA authenticator built-in) for free.</p>
-                    <div class="project-links">
-                        <a href="https://bitwarden.com/" target="_blank" class="project-link">Website</a>
-                        <a href="https://github.com/bitwarden/mobile" target="_blank" class="project-link">GitHub</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.x8bit.bitwarden" target="_blank" class="project-link">Play Store</a>
+
+                    <div class="project-card">
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <img src="https://www.google.com/s2/favicons?domain=reemo.io&sz=128" alt="Reemo Logo" width="40" height="40" loading="lazy" decoding="async" style="width: 40px; height: 40px; margin-right: 12px; border-radius: 8px;">
+                                <h3 style="margin: 0;">Reemo.io</h3>
+                            </div>
+                            <p>A high-performance, low-latency remote desktop solution optimized for gaming, 3D rendering, and smooth remote work from anywhere.</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://reemo.io/" target="_blank" rel="noopener noreferrer" class="project-link">Website</a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                        <img src="https://cdn.simpleicons.org/tailscale" alt="Tailscale Logo" style="width: 40px; height: 40px; margin-right: 12px;">
-                        <h3 style="margin: 0;">Tailscale</h3>
-                    </div>
-                    <p>A zero-config VPN built on WireGuard, making secure networking easy and accessible.</p>
-                    <div class="project-links">
-                        <a href="https://tailscale.com/" target="_blank" class="project-link">Website</a>
-                        <a href="https://github.com/tailscale/tailscale-android" target="_blank" class="project-link">GitHub</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.tailscale.ipn" target="_blank" class="project-link">Play Store</a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                        <img src="https://cdn.simpleicons.org/duckduckgo" alt="DuckDuckGo Logo" style="width: 40px; height: 40px; margin-right: 12px;">
-                        <h3 style="margin: 0;">DuckDuckGo</h3>
-                    </div>
-                    <p>A privacy-focused search engine with open-source apps and extensions that protect you from tracking.</p>
-                    <div class="project-links">
-                        <a href="https://duckduckgo.com/" target="_blank" class="project-link">Website</a>
-                        <a href="https://github.com/duckduckgo/Android" target="_blank" class="project-link">GitHub</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.duckduckgo.mobile.android" target="_blank" class="project-link">Play Store</a>
+                <h2 style="margin-top: 60px;">Favorite Person</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Alexandra_Elbakyan_at_Sochi_in_2021_%28cropped%29.jpg" alt="Alexandra Elbakyan" width="40" height="40" loading="lazy" decoding="async" style="width: 40px; height: 40px; margin-right: 12px; border-radius: 50%; object-fit: cover;">
+                                <h3 style="margin: 0;">Alexandra Elbakyan</h3>
+                            </div>
+                            <p>Creator of Sci-Hub, a platform providing free access to millions of research papers and books. She is a prominent advocate for the open access movement and universal access to scientific knowledge.</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://en.wikipedia.org/wiki/Alexandra_Elbakyan" target="_blank" rel="noopener noreferrer" class="project-link">Wikipedia</a>
+                            <a href="https://sci-hub.ru/" target="_blank" rel="noopener noreferrer" class="project-link">Sci-Hub</a>
+                        </div>
                     </div>
                 </div>
-
-                <div class="project-card">
-                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                        <img src="https://github.com/meetrevision.png" alt="ReviOS Logo" style="width: 40px; height: 40px; margin-right: 12px; border-radius: 8px;">
-                        <h3 style="margin: 0;">ReviOS</h3>
-                    </div>
-                    <p>An open-source custom playbook for Windows that strips telemetry, removes bloatware, and significantly improves system performance and privacy.</p>
-                    <div class="project-links">
-                        <a href="https://revi.cc/" target="_blank" class="project-link">Website</a>
-                        <a href="https://github.com/meetrevision/playbook" target="_blank" class="project-link">GitHub</a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                        <img src="https://avatars.githubusercontent.com/readest" alt="Readest Logo" style="width: 40px; height: 40px; margin-right: 12px; border-radius: 8px;">
-                        <h3 style="margin: 0;">Readest</h3>
-                    </div>
-                    <p>An open-source e-book reader app with a clean reading experience and support for modern book formats.</p>
-                    <div class="project-links">
-                        <a href="https://readest.com" target="_blank" class="project-link">Website</a>
-                        <a href="https://github.com/readest/readest" target="_blank" class="project-link">GitHub</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.bilingify.readest" target="_blank" class="project-link">Play Store</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                        <img src="https://www.google.com/s2/favicons?domain=psiphon.ca&sz=128" alt="Psiphon Pro Logo" style="width: 40px; height: 40px; margin-right: 12px; border-radius: 8px;">
-                        <h3 style="margin: 0;">Psiphon Pro</h3>
-                    </div>
-                    <p>An open-source censorship-circumvention VPN app that helps users securely access the open internet from restricted networks.</p>
-                    <div class="project-links">
-                        <a href="https://psiphon.ca/en/download.html" target="_blank" class="project-link">Website</a>
-                        <a href="https://github.com/Psiphon-Inc/psiphon-android" target="_blank" class="project-link">GitHub</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.psiphon3.subscription" target="_blank" class="project-link">Play Store</a>
-                    </div>
-                </div>
-            </div>        
-
-            <h2 style="margin-top: 60px;">Favorite Closed Source Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                        <img src="https://www.google.com/s2/favicons?domain=videosoftdev.com&sz=128" alt="VSDC Logo" style="width: 40px; height: 40px; margin-right: 12px; border-radius: 8px;">
-                        <h3 style="margin: 0;">VSDC Free Video Editor</h3>
-                    </div>
-                    <p>A highly capable, free non-linear video editing suite with advanced tools, color correction, and hardware acceleration.</p>
-                    <div class="project-links">
-                        <a href="https://www.videosoftdev.com/" target="_blank" class="project-link">Website</a>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                        <img src="https://www.google.com/s2/favicons?domain=reemo.io&sz=128" alt="Reemo Logo" style="width: 40px; height: 40px; margin-right: 12px; border-radius: 8px;">
-                        <h3 style="margin: 0;">Reemo.io</h3>
-                    </div>
-                    <p>A high-performance, low-latency remote desktop solution optimized for gaming, 3D rendering, and smooth remote work from anywhere.</p>
-                    <div class="project-links">
-                        <a href="https://reemo.io/" target="_blank" class="project-link">Website</a>
-                    </div>
-                </div>
-
             </div>
-
-            <h2 style="margin-top: 60px;">Favorite Person</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Alexandra_Elbakyan_at_Sochi_in_2021_%28cropped%29.jpg" alt="Alexandra Elbakyan" style="width: 40px; height: 40px; margin-right: 12px; border-radius: 50%; object-fit: cover;">
-                        <h3 style="margin: 0;">Alexandra Elbakyan</h3>
-                    </div>
-                    <p>Creator of Sci-Hub, a platform providing free access to millions of research papers and books. She is a prominent advocate for the open access movement and universal access to scientific knowledge.</p>
-                    <div class="project-links">
-                        <a href="https://en.wikipedia.org/wiki/Alexandra_Elbakyan" target="_blank" class="project-link">Wikipedia</a>
-                        <a href="https://sci-hub.ru/" target="_blank" class="project-link">Sci-Hub</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <script>
         async function fetchLatestRelease(repo, linkId, isApk = false) {
@@ -174,20 +221,20 @@
                 if (!response.ok) return;
                 const data = await response.json();
                 const linkElem = document.getElementById(linkId);
-                
+
                 if (linkElem) {
                     if (isApk && data.assets && data.assets.length > 0) {
-                        const apkAsset = data.assets.find(asset => asset.name.endsWith('.apk'));
+                        const apkAsset = data.assets.find((asset) => asset.name.endsWith('.apk'));
                         if (apkAsset) {
                             linkElem.href = apkAsset.browser_download_url;
-                            linkElem.innerText = `APK`;
+                            linkElem.textContent = 'APK';
                         } else {
                             linkElem.href = data.html_url;
-                            linkElem.innerText = `Release`;
+                            linkElem.textContent = 'Release';
                         }
                     } else {
                         linkElem.href = data.html_url;
-                        linkElem.innerText = `Release`;
+                        linkElem.textContent = 'Release';
                     }
                     linkElem.style.display = 'inline-block';
                 }
@@ -200,6 +247,6 @@
             fetchLatestRelease('namidaco/namida', 'namida-download', true);
         });
     </script>
-    <script src="nav.js"></script>
+    <script src="nav.js?v=2.0.0" defer></script>
 </body>
 </html>

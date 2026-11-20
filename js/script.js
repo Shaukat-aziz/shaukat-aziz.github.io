@@ -1,62 +1,84 @@
-// JavaScript moved from index.html
+// Core UI, Theme System, Interactive 3D Probability Lab & Modals
 
-// Global Theme Switcher functions
-window.setTheme = function(theme) {
-    if (theme === 'default') {
+const CV_PDF_URL = 'https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/shaukat_cv.pdf';
+
+// Global Theme Switcher (CSS Custom Properties + CustomEvent)
+window.setTheme = function (theme) {
+    const validThemes = ['default', 'cyan', 'green', 'orange', 'red', 'light'];
+    const targetTheme = validThemes.includes(theme) ? theme : 'default';
+
+    if (targetTheme === 'default') {
         document.documentElement.removeAttribute('data-theme');
     } else {
-        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.setAttribute('data-theme', targetTheme);
     }
-    localStorage.setItem('site-theme', theme);
-    
-    // Update active state in picker buttons
-    document.querySelectorAll('.theme-picker-btn').forEach(btn => {
-        if (btn.getAttribute('data-theme-value') === theme) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
+
+    try {
+        localStorage.setItem('site-theme', targetTheme);
+    } catch (_) {
+        /* ignore storage restrictions */
+    }
+
+    document.querySelectorAll('.theme-picker-btn').forEach((btn) => {
+        const isActive = btn.getAttribute('data-theme-value') === targetTheme;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', String(isActive));
     });
 
-    window.updateThemeToggleButtons(theme);
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeColorMeta) {
+        themeColorMeta.setAttribute('content', targetTheme === 'light' ? '#f8fafc' : '#070714');
+    }
+
+    window.updateThemeToggleButtons(targetTheme);
+    window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: targetTheme } }));
 };
 
-window.updateThemeToggleButtons = function(theme) {
-    const activeTheme = theme || localStorage.getItem('site-theme') || 'default';
+window.updateThemeToggleButtons = function (theme) {
+    let activeTheme = theme;
+    if (!activeTheme) {
+        try {
+            activeTheme = localStorage.getItem('site-theme') || 'default';
+        } catch (_) {
+            activeTheme = 'default';
+        }
+    }
     const isLight = activeTheme === 'light';
-    document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+    document.querySelectorAll('.theme-toggle-btn').forEach((btn) => {
         btn.textContent = isLight ? 'Dark' : 'Light';
         btn.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
+        btn.setAttribute('aria-pressed', String(isLight));
     });
 };
 
-window.toggleLightTheme = function() {
-    const currentTheme = localStorage.getItem('site-theme') || 'default';
+window.toggleLightTheme = function () {
+    let currentTheme = 'default';
+    try {
+        currentTheme = localStorage.getItem('site-theme') || 'default';
+    } catch (_) {
+        currentTheme = 'default';
+    }
     window.setTheme(currentTheme === 'light' ? 'default' : 'light');
 };
 
 // Coin Toss Widget Logic
 let isTossing = false;
-window.tossCoin = function() {
+window.tossCoin = function () {
     if (isTossing) return;
-    isTossing = true;
-    
     const coin = document.getElementById('shaukatCoin');
     const coinBack = document.getElementById('coinBack');
     const coinResultTitle = document.getElementById('coinResultTitle');
     const announcementText = document.getElementById('announcementText');
     const announcementIcon = document.getElementById('announcementIcon');
-    
-    if (!coin) return;
-    
-    // Determine result
+
+    if (!coin || !coinBack || !coinResultTitle) return;
+    isTossing = true;
+
     const isHeads = Math.random() < 0.5;
-    
-    // Clear previous tossing classes
+
     coin.classList.remove('tossing-heads', 'tossing-tails');
-    void coin.offsetWidth; // Trigger reflow to restart animation
-    
-    // Configure coin face & class
+    void coin.offsetWidth;
+
     if (isHeads) {
         coinBack.classList.remove('tails');
         coinResultTitle.textContent = 'HEADS';
@@ -66,23 +88,22 @@ window.tossCoin = function() {
         coinResultTitle.textContent = 'TAILS';
         coin.classList.add('tossing-tails');
     }
-    
+
     if (announcementText) {
-        announcementText.textContent = "Tossing the coin... 🪙";
+        announcementText.textContent = 'Measuring coin superposition...';
         if (announcementIcon) {
-            announcementIcon.className = "fas fa-sync-alt fa-spin announcement-icon";
-            announcementIcon.style.color = "#FFD700";
+            announcementIcon.className = 'fas fa-sync-alt fa-spin announcement-icon';
+            announcementIcon.style.color = '#f59e0b';
         }
     }
-    
-    // Display result after flip finishes (1.2s)
+
     setTimeout(() => {
-        const resultStr = isHeads ? "HEADS! 🪙" : "TAILS! 🪙";
+        const resultStr = isHeads ? 'HEADS!' : 'TAILS!';
         if (announcementText) {
-            announcementText.innerHTML = `Toss Result: <strong>${resultStr}</strong>`;
+            announcementText.innerHTML = `Coin Measured: <strong>${resultStr}</strong>`;
             if (announcementIcon) {
-                announcementIcon.className = "fas fa-coins announcement-icon";
-                announcementIcon.style.color = isHeads ? "#FFD700" : "#C0C0C0";
+                announcementIcon.className = 'fas fa-coins announcement-icon';
+                announcementIcon.style.color = isHeads ? '#f59e0b' : '#94a3b8';
             }
         }
         isTossing = false;
@@ -91,20 +112,16 @@ window.tossCoin = function() {
 
 // Dice Rolling Widget Logic
 let isRolling = false;
-window.rollDice = function() {
+window.rollDice = function () {
     if (isRolling) return;
-    isRolling = true;
-    
     const dice = document.getElementById('physicsDice');
     const announcementText = document.getElementById('announcementText');
     const announcementIcon = document.getElementById('announcementIcon');
-    
+
     if (!dice) return;
-    
-    // Roll random face (1 to 6)
+    isRolling = true;
+
     const result = Math.floor(Math.random() * 6) + 1;
-    
-    // Standard face rotations for landing
     const faceRotations = {
         1: { x: 0, y: 0 },
         2: { x: 0, y: 180 },
@@ -113,209 +130,175 @@ window.rollDice = function() {
         5: { x: -90, y: 0 },
         6: { x: 90, y: 0 }
     };
-    
-    // Add multiple crazy spins
-    window.diceSpins = (window.diceSpins || 0) + 3; // 3 full turns
-    const targetX = faceRotations[result].x + (window.diceSpins * 360);
-    const targetY = faceRotations[result].y + (window.diceSpins * 360);
-    
+
+    window.diceSpins = (window.diceSpins || 0) + 3;
+    const targetX = faceRotations[result].x + window.diceSpins * 360;
+    const targetY = faceRotations[result].y + window.diceSpins * 360;
+
     dice.style.transform = `rotateX(${targetX}deg) rotateY(${targetY}deg)`;
-    
+
     if (announcementText) {
-        announcementText.textContent = "Rolling the dice... 🎲";
+        announcementText.textContent = 'Rolling the 3D quantum die...';
         if (announcementIcon) {
-            announcementIcon.className = "fas fa-dice fa-spin announcement-icon";
-            announcementIcon.style.color = "#8B00FF";
+            announcementIcon.className = 'fas fa-dice fa-spin announcement-icon';
+            announcementIcon.style.color = 'var(--accent-soft)';
         }
     }
-    
-    // Display result after roll finishes (1.5s)
+
     setTimeout(() => {
         if (announcementText) {
-            announcementText.innerHTML = `Dice Rolled: <strong>${result}! 🎲</strong>`;
+            announcementText.innerHTML = `Die Outcome: <strong>State |${result}⟩</strong>`;
             if (announcementIcon) {
-                announcementIcon.className = "fas fa-dice-d6 announcement-icon";
-                announcementIcon.style.color = "#00E676";
+                announcementIcon.className = 'fas fa-dice-d6 announcement-icon';
+                announcementIcon.style.color = '#10b981';
             }
         }
         isRolling = false;
     }, 1500);
 };
 
-// Accordion Toggle function
-window.toggleAccordion = function(header) {
-    const item = header.parentElement;
-    item.classList.toggle('active');
+// Accordion Toggle
+window.toggleAccordion = function (header) {
+    const item = header && header.parentElement;
+    if (!item) return;
+    const isActive = item.classList.toggle('active');
+    header.setAttribute('aria-expanded', String(isActive));
 };
 
-// Toggle mobile menu
-function toggleMenu() {
+// Mobile Menu Toggle
+window.toggleMenu = function () {
     const hamburger = document.querySelector('.hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     const overlay = document.getElementById('overlay');
 
-    if (hamburger) hamburger.classList.toggle('open');
-    if (mobileMenu) mobileMenu.classList.toggle('open');
-    if (overlay) overlay.classList.toggle('active');
+    const willOpen = mobileMenu ? !mobileMenu.classList.contains('open') : false;
 
-    // Toggle body overflow when menu is open
-    if (mobileMenu && mobileMenu.classList.contains('open')) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = '';
+    if (hamburger) {
+        hamburger.classList.toggle('open', willOpen);
+        hamburger.setAttribute('aria-expanded', String(willOpen));
     }
-}
+    if (mobileMenu) {
+        mobileMenu.classList.toggle('open', willOpen);
+    }
+    if (overlay) {
+        overlay.classList.toggle('active', willOpen);
+    }
+
+    document.body.style.overflow = willOpen ? 'hidden' : '';
+};
 
 // Contact Modal Functions
-function openContactModal() {
+window.openContactModal = function () {
     const modal = document.getElementById('contactModal');
     if (!modal) return;
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
-}
+};
 
-function closeContactModal() {
+window.closeContactModal = function () {
     const modal = document.getElementById('contactModal');
     if (!modal) return;
     modal.style.display = 'none';
     document.body.style.overflow = '';
-}
+};
 
 // CV Viewer Modal Functions
-function openCVViewModal() {
+window.openCVViewModal = function () {
     const modal = document.getElementById('cvViewModal');
     const frame = document.getElementById('cvViewFrame');
     if (!modal || !frame) return;
 
-    const pdfUrl = 'https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/shaukat_cv.pdf';
-    const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    if (isMobile) {
-        frame.src = `https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true`;
-    } else {
-        frame.src = pdfUrl;
-    }
+    const isMobile =
+        window.innerWidth <= 768 ||
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    frame.src = isMobile
+        ? `https://docs.google.com/viewer?url=${encodeURIComponent(CV_PDF_URL)}&embedded=true`
+        : CV_PDF_URL;
 
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
-}
+};
 
-function closeCVViewModal() {
+window.closeCVViewModal = function () {
     const modal = document.getElementById('cvViewModal');
     const frame = document.getElementById('cvViewFrame');
     if (!modal) return;
     modal.style.display = 'none';
     if (frame) frame.src = '';
     document.body.style.overflow = '';
-}
+};
 
-// XKCD Modal Functions (optional)
-let latestXkcd = null;
-function openXKCDModal() {
-    if (!latestXkcd) return;
-    const modal = document.getElementById('xkcdModal');
-    const modalImg = document.getElementById('xkcdModalImg');
-    const modalTitle = document.getElementById('xkcdModalTitle');
-    const modalAlt = document.getElementById('xkcdModalAlt');
-    if (!modal || !modalImg) return;
-
-    modalImg.src = latestXkcd.img;
-    modalAlt.textContent = latestXkcd.altText || latestXkcd.alt || '';
-    modalTitle.textContent = `XKCD #${latestXkcd.num}: ${latestXkcd.title}`;
-
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-}
-
-function closeXKCDModal() {
-    const modal = document.getElementById('xkcdModal');
-    if (!modal) return;
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Hide preloader once page is fully loaded (also fallback on DOMContentLoaded)
+function initSite() {
+    // Fast preloader dismissal so FCP/LCP stay snappy
     const preloader = document.getElementById('preloader');
     function hidePreloader() {
-        if (!preloader) return;
+        if (!preloader || preloader.dataset.dismissed) return;
+        preloader.dataset.dismissed = '1';
         preloader.classList.add('hidden');
         setTimeout(() => {
-            if (preloader && preloader.parentNode) preloader.parentNode.removeChild(preloader);
-        }, 600);
+            if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
+        }, 320);
     }
 
-    // If the full window load already fired, hide immediately
-    if (document.readyState === 'complete') {
-        hidePreloader();
-    } else {
-        window.addEventListener('load', hidePreloader);
-        // Also hide after a timeout as a safety
-        setTimeout(hidePreloader, 4000);
+    if (preloader) {
+        setTimeout(hidePreloader, 180);
+        window.addEventListener('load', hidePreloader, { once: true });
+        setTimeout(hidePreloader, 1200);
     }
 
-    // Close menu when clicking outside
-    document.addEventListener('click', function (event) {
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (event) => {
         const mobileMenu = document.getElementById('mobileMenu');
         const hamburger = document.querySelector('.hamburger');
-        const overlay = document.getElementById('overlay');
-
-        if (mobileMenu && mobileMenu.classList.contains('open') &&
+        if (
+            mobileMenu &&
+            mobileMenu.classList.contains('open') &&
             !mobileMenu.contains(event.target) &&
-            (!hamburger || !hamburger.contains(event.target))) {
-            toggleMenu();
+            (!hamburger || !hamburger.contains(event.target))
+        ) {
+            window.toggleMenu();
         }
     });
 
-    // Close contact modal when clicking outside
+    // Backdrop click closures for modals
     const contactModal = document.getElementById('contactModal');
     if (contactModal) {
-        contactModal.addEventListener('click', function(e) {
-            if (e.target === this) closeContactModal();
+        contactModal.addEventListener('click', (e) => {
+            if (e.target === contactModal) window.closeContactModal();
         });
     }
 
-    // Close CV viewer modal when clicking outside
     const cvViewModal = document.getElementById('cvViewModal');
     if (cvViewModal) {
-        cvViewModal.addEventListener('click', function(e) {
-            if (e.target === this) closeCVViewModal();
+        cvViewModal.addEventListener('click', (e) => {
+            if (e.target === cvViewModal) window.closeCVViewModal();
         });
     }
 
-    // Ensure XKCD modal closes when clicking outside
-    const xkcdModal = document.getElementById('xkcdModal');
-    if (xkcdModal) {
-        xkcdModal.addEventListener('click', e => {
-            if (e.target === xkcdModal) closeXKCDModal();
-        });
+    // Escape key closes open modal or mobile drawer
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        const cModal = document.getElementById('contactModal');
+        const cvModal = document.getElementById('cvViewModal');
+        const mMenu = document.getElementById('mobileMenu');
+        if (cvModal && cvModal.style.display === 'flex') window.closeCVViewModal();
+        else if (cModal && cModal.style.display === 'flex') window.closeContactModal();
+        else if (mMenu && mMenu.classList.contains('open')) window.toggleMenu();
+    });
+
+    // Apply saved theme & sync UI controls
+    let savedTheme = 'default';
+    try {
+        savedTheme = localStorage.getItem('site-theme') || 'default';
+    } catch (_) {
+        savedTheme = 'default';
     }
-
-    // Fade-in animation for elements on scroll
-    const fadeInImages = document.querySelectorAll('.js-fade-in-image');
-    if (fadeInImages.length) {
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target); // Stop observing once it's visible
-                }
-            });
-        }, { threshold: 0.1 });
-
-        fadeInImages.forEach(image => observer.observe(image));
-    }
-
-    // Fetch latest XKCD comic (non-blocking)
-    fetch('https://aqendo.github.io/xkcd-parser/parsed.json')
-        .then(response => response.json())
-        .then(jsonData => {
-            const comics = Array.isArray(jsonData) ? jsonData : [jsonData];
-            latestXkcd = comics[Math.floor(Math.random() * comics.length)];
-        })
-        .catch(() => {/* ignore fetch errors */});
-
-    // Initialize Theme Active States
-    const savedTheme = localStorage.getItem('site-theme') || 'default';
     window.setTheme(savedTheme);
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSite);
+} else {
+    initSite();
+}

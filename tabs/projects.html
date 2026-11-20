@@ -3,48 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects — Shaukat Aziz</title>
+    <meta name="description" content="Physics and computational research projects by Shaukat Aziz: Quantum Simulation (PH354), Quantum Optics applied to Qubits, and Terahertz Quantum Sensing.">
+    <meta name="author" content="Shaukat Aziz">
+    <link rel="canonical" href="https://shaukataziz.vip/tabs/projects.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shaukataziz.vip/tabs/projects.html">
+    <meta property="og:title" content="Physics &amp; Computing Projects — Shaukat Aziz">
+    <meta property="og:description" content="Explore academic projects in quantum simulation, quantum optics, and terahertz quantum sensing.">
+    <meta property="og:image" content="https://shaukataziz.vip/small_files/shaukat1.jpg">
+    <meta name="theme-color" content="#070714">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
     <script>
-        (function() {
-            const savedTheme = localStorage.getItem('site-theme') || 'default';
-            if (savedTheme !== 'default') {
-                document.documentElement.setAttribute('data-theme', savedTheme);
-            }
+        (function () {
+            try {
+                var savedTheme = localStorage.getItem('site-theme') || 'default';
+                if (savedTheme !== 'default') {
+                    document.documentElement.setAttribute('data-theme', savedTheme);
+                }
+                if (savedTheme === 'light') {
+                    var tc = document.querySelector('meta[name="theme-color"]');
+                    if (tc) tc.setAttribute('content', '#f8fafc');
+                }
+            } catch (_) {}
         })();
     </script>
-    <link rel="stylesheet" href="../css/style.css?v=1.0.2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css?v=2.0.0">
 </head>
 <body>
-    <div id="navbar"></div>
-    <section class="section tab-page-offset">
-        <div class="section-container">
-            <h2 style="margin-top: 80px;">Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>Quantum Simulation Project</h3>
-                    <p>Computational study of quantum systems using Python.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/SHAUKAT23/PH354" class="project-link">GitHub</a>
-                        <a href="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/PH354.pdf" class="project-link">Paper</a>
+    <div class="background-elements" aria-hidden="true"></div>
+    <header id="navbar"></header>
+
+    <main>
+        <section class="section tab-page-offset">
+            <div class="section-container">
+                <h2>Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div>
+                            <h3>Quantum Simulation Project</h3>
+                            <p>Computational study of quantum systems using Python.</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/SHAUKAT23/PH354" class="project-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            <a href="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/PH354.pdf" class="project-link" target="_blank" rel="noopener noreferrer">Paper</a>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="project-card">
-                    <h3>Quantum Optics applied to Quantum qubits</h3>
-                    <p>Exploration of quantum optical systems and their applications in quantum information processing, specifically in the development and manipulation of quantum qubits.</p>
-                    <div class="project-links">
-                        <a href="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/Term_Paper.pdf" class="project-link">View Paper</a>
+
+                    <div class="project-card">
+                        <div>
+                            <h3>Quantum Optics applied to Quantum qubits</h3>
+                            <p>Exploration of quantum optical systems and their applications in quantum information processing, specifically in the development and manipulation of quantum qubits.</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/Term_Paper.pdf" class="project-link" target="_blank" rel="noopener noreferrer">View Paper</a>
+                        </div>
                     </div>
-                </div>
-                <div class="project-card">
-                    <h3>Terahertz Quantum Sensing</h3>
-                    <p>Investigation of quantum sensing techniques in the terahertz regime, focusing on novel approaches for high-sensitivity detection and measurement using quantum systems.</p>
-                    <div class="project-links">
-                        <a href="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/presentation.pdf" class="project-link">Presentation</a>
+
+                    <div class="project-card">
+                        <div>
+                            <h3>Terahertz Quantum Sensing</h3>
+                            <p>Investigation of quantum sensing techniques in the terahertz regime, focusing on novel approaches for high-sensitivity detection and measurement using quantum systems.</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/presentation.pdf" class="project-link" target="_blank" rel="noopener noreferrer">Presentation</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <script src="nav.js"></script>
+        </section>
+    </main>
+
+    <script src="nav.js?v=2.0.0" defer></script>
 </body>
 </html>

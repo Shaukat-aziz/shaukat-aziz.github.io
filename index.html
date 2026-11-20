@@ -4,357 +4,556 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shaukat Aziz - Physics Research Student | IISc</title>
+    <title>Shaukat Aziz — Physics Research Student | IISc Bangalore</title>
+    <meta name="description" content="Academic portfolio of Shaukat Aziz, BS (Research) Physics student at IISc Bangalore. Explore computational physics projects, quantum computing notes, and interactive 3D simulations.">
+    <meta name="author" content="Shaukat Aziz">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://shaukataziz.vip/">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shaukataziz.vip/">
+    <meta property="og:title" content="Shaukat Aziz — Physics &amp; Innovation | IISc Bangalore">
+    <meta property="og:description" content="Academic portfolio of Shaukat Aziz, Physics (BS Research) student at IISc Bangalore exploring quantum computing, computational physics, and quantum materials.">
+    <meta property="og:image" content="https://shaukataziz.vip/small_files/shaukat1.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Shaukat Aziz — Physics &amp; Innovation">
+    <meta name="twitter:description" content="Physics Research Student at IISc Bangalore — Projects, Course Notes, and Quantum Computing.">
+    <meta name="twitter:image" content="https://shaukataziz.vip/small_files/shaukat1.jpg">
+
+    <!-- Theme bootstrap before paint -->
+    <meta name="theme-color" content="#070714">
     <script>
-        (function() {
-            const savedTheme = localStorage.getItem('site-theme') || 'default';
-            if (savedTheme !== 'default') {
-                document.documentElement.setAttribute('data-theme', savedTheme);
-            }
+        (function () {
+            try {
+                var savedTheme = localStorage.getItem('site-theme') || 'default';
+                if (savedTheme !== 'default') {
+                    document.documentElement.setAttribute('data-theme', savedTheme);
+                }
+                if (savedTheme === 'light') {
+                    var tc = document.querySelector('meta[name="theme-color"]');
+                    if (tc) tc.setAttribute('content', '#f8fafc');
+                }
+            } catch (_) {}
         })();
     </script>
-    <link rel="stylesheet" href="css/style.css?v=1.0.2">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* Mobile-specific: hide top-right contact button and keep contact inside mobile menu */
-        @media (max-width: 768px) {
-            .nav-contact { display: none !important; }
-            .mobile-menu .nav-contact { display: inline-block !important; }
+
+    <!-- Icons & Web App Manifest -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="manifest" href="site.webmanifest">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css?v=2.0.0">
+    <noscript><style>#preloader{display:none!important}</style></noscript>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "Shaukat Aziz",
+          "url": "https://shaukataziz.vip/"
+        },
+        {
+          "@type": "Person",
+          "name": "Shaukat Aziz",
+          "url": "https://shaukataziz.vip/",
+          "image": "https://shaukataziz.vip/small_files/shaukat1.jpg",
+          "affiliation": {
+            "@type": "CollegeOrUniversity",
+            "name": "Indian Institute of Science (IISc), Bangalore"
+          },
+          "sameAs": [
+            "https://github.com/Shaukat-aziz",
+            "https://www.linkedin.com/in/z-shaukat-aziz-035901265/",
+            "https://orcid.org/0009-0002-1133-4041",
+            "https://iisc.academia.edu/SHAUKATAZIZ",
+            "https://www.researchgate.net/profile/Z-Shaukata-Aziz"
+          ]
         }
-    </style>
-    <!-- Favicon and mobile icons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/Logo.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/Logo.png">
-    <link rel="apple-touch-icon" href="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/Logo.png">
-    <meta name="theme-color" content="#0a0a1a">
+      ]
+    }
+    </script>
 </head>
 
 <body>
+    <a class="skip-link" href="#home">Skip to main content</a>
+
     <!-- Preloader -->
-    <div id="preloader">
+    <div id="preloader" aria-hidden="true">
         <div class="preloader-inner">
-            <img src="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/Logo.png" alt="logo" class="preloader-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="preloader-logo-svg">
+                <defs>
+                    <linearGradient id="preOrbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="var(--accent)" />
+                        <stop offset="55%" stop-color="var(--accent-soft)" />
+                        <stop offset="100%" stop-color="var(--accent-cyan)" />
+                    </linearGradient>
+                </defs>
+                <circle cx="50" cy="50" r="45" fill="none" stroke="url(#preOrbGrad)" stroke-width="1.3" stroke-opacity="0.45" stroke-dasharray="4 3" />
+                <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="url(#preOrbGrad)" stroke-width="2.2" />
+                <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="url(#preOrbGrad)" stroke-width="2.2" transform="rotate(60 50 50)" />
+                <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="url(#preOrbGrad)" stroke-width="2.2" transform="rotate(-60 50 50)" />
+                <circle cx="50" cy="50" r="14" fill="var(--bg-1)" stroke="url(#preOrbGrad)" stroke-width="1.6" />
+                <g fill="none" stroke="var(--text-primary)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="50" y1="39.5" x2="50" y2="60.5" />
+                    <line x1="46.5" y1="39.5" x2="53.5" y2="39.5" />
+                    <line x1="46.5" y1="60.5" x2="53.5" y2="60.5" />
+                    <path d="M40.5 43 C40.5 51 44.2 53.5 50 53.5 C55.8 53.5 59.5 51 59.5 43" />
+                </g>
+            </svg>
         </div>
     </div>
-    <div id="navbar">
-        <nav>
-            <div class="nav-logo">
-                <img src="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/Logo.png" alt="Website Logo" class="website-logo">
-                Shaukat Aziz
-            </div>
+
+    <!-- Ambient Background -->
+    <div class="background-elements" aria-hidden="true"></div>
+
+    <!-- Navigation -->
+    <header id="navbar">
+        <nav aria-label="Primary Navigation">
+            <a href="#home" class="nav-logo" aria-label="Shaukat Aziz Home">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="website-logo-svg" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="navOrbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="var(--accent)" />
+                            <stop offset="55%" stop-color="var(--accent-soft)" />
+                            <stop offset="100%" stop-color="var(--accent-cyan)" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="url(#navOrbGrad)" stroke-width="1.2" stroke-opacity="0.45" stroke-dasharray="4 3" />
+                    <g stroke="var(--accent-soft)" stroke-linecap="round" opacity="0.65">
+                        <line x1="96" y1="50" x2="92.5" y2="50" stroke-width="1.5" />
+                        <line x1="50" y1="96" x2="50" y2="92.5" stroke-width="1.5" />
+                        <line x1="4" y1="50" x2="7.5" y2="50" stroke-width="1.5" />
+                        <line x1="50" y1="4" x2="50" y2="7.5" stroke-width="1.5" />
+                    </g>
+                    <g>
+                        <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="url(#navOrbGrad)" stroke-width="2.1" />
+                        <circle cx="87.59" cy="44.87" r="3" fill="var(--accent-cyan)" />
+                    </g>
+                    <g transform="rotate(60 50 50)">
+                        <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="url(#navOrbGrad)" stroke-width="2.1" />
+                        <circle cx="15.36" cy="57.50" r="3" fill="var(--accent-soft)" />
+                    </g>
+                    <g transform="rotate(-60 50 50)">
+                        <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="url(#navOrbGrad)" stroke-width="2.1" />
+                        <circle cx="33.10" cy="36.41" r="3" fill="var(--text-primary)" />
+                    </g>
+                    <circle cx="50" cy="50" r="14" fill="var(--bg-1)" stroke="url(#navOrbGrad)" stroke-width="1.6" />
+                    <g fill="none" stroke="var(--text-primary)" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="50" y1="39.5" x2="50" y2="60.5" />
+                        <line x1="46.5" y1="39.5" x2="53.5" y2="39.5" />
+                        <line x1="46.5" y1="60.5" x2="53.5" y2="60.5" />
+                        <path d="M40.5 43 C40.5 51 44.2 53.5 50 53.5 C55.8 53.5 59.5 51 59.5 43" />
+                    </g>
+                </svg>
+                <span class="nav-logo-text">Shaukat Aziz</span>
+            </a>
+
             <div class="nav-links">
-                <a href="#home">Home</a>
+                <a href="#home" aria-current="page">Home</a>
                 <a href="tabs/notes.html">Notes</a>
                 <a href="tabs/projects.html">Projects</a>
                 <a href="tabs/blog.html">Blog</a>
                 <a href="tabs/favorites.html">Favorite</a>
-                <a href="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/shaukat_cv.pdf" target="_blank">CV</a>
+                <a href="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/shaukat_cv.pdf" target="_blank" rel="noopener noreferrer">CV</a>
             </div>
-            <div class="theme-picker-container">
-                <span class="theme-label" style="font-size: 0.8rem; opacity: 0.7; margin-right: 0.3rem;"><i class="fas fa-palette"></i></span>
-                <div class="theme-picker-btn" data-theme-value="default" onclick="setTheme('default')" title="Default Purple"></div>
-                <div class="theme-picker-btn" data-theme-value="cyan" onclick="setTheme('cyan')" title="Neon Cyan"></div>
-                <div class="theme-picker-btn" data-theme-value="green" onclick="setTheme('green')" title="Emerald Green"></div>
-                <div class="theme-picker-btn" data-theme-value="orange" onclick="setTheme('orange')" title="Sunset Orange"></div>
-                <div class="theme-picker-btn" data-theme-value="red" onclick="setTheme('red')" title="Coral Red"></div>
-                <div class="theme-picker-btn" data-theme-value="light" onclick="setTheme('light')" title="Light Aesthetic"></div>
-            </div>
-            <button class="theme-toggle-btn" onclick="toggleLightTheme()">Light</button>
-            <button class="nav-contact" onclick="openContactModal()">Contact</button>
-            
-            <!-- Mobile Menu Toggle -->
-            <div class="hamburger" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+
+            <div class="nav-actions">
+                <div class="theme-picker-container" role="group" aria-label="Color themes">
+                    <span class="theme-label" aria-hidden="true"><i class="fas fa-palette"></i></span>
+                    <button type="button" class="theme-picker-btn" data-theme-value="default" onclick="setTheme('default')" title="Cosmic Purple" aria-label="Cosmic Purple theme" aria-pressed="true"></button>
+                    <button type="button" class="theme-picker-btn" data-theme-value="cyan" onclick="setTheme('cyan')" title="Neon Cyan" aria-label="Neon Cyan theme" aria-pressed="false"></button>
+                    <button type="button" class="theme-picker-btn" data-theme-value="green" onclick="setTheme('green')" title="Emerald Green" aria-label="Emerald Green theme" aria-pressed="false"></button>
+                    <button type="button" class="theme-picker-btn" data-theme-value="orange" onclick="setTheme('orange')" title="Sunset Orange" aria-label="Sunset Orange theme" aria-pressed="false"></button>
+                    <button type="button" class="theme-picker-btn" data-theme-value="red" onclick="setTheme('red')" title="Coral Red" aria-label="Coral Red theme" aria-pressed="false"></button>
+                    <button type="button" class="theme-picker-btn" data-theme-value="light" onclick="setTheme('light')" title="Light Aesthetic" aria-label="Light Aesthetic theme" aria-pressed="false"></button>
+                </div>
+                <button type="button" class="theme-toggle-btn" onclick="toggleLightTheme()" aria-label="Switch to light theme" aria-pressed="false">Light</button>
+                <button type="button" class="nav-contact" onclick="openContactModal()">Contact</button>
+
+                <button type="button" class="hamburger" onclick="toggleMenu()" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </nav>
-        
+
         <!-- Mobile Menu -->
-        <div class="mobile-menu" id="mobileMenu">
-            <div class="close-btn" onclick="toggleMenu()">
+        <div class="mobile-menu" id="mobileMenu" aria-label="Mobile Navigation">
+            <button type="button" class="close-btn" onclick="toggleMenu()" aria-label="Close navigation menu">
                 <i class="fas fa-times"></i>
-            </div>
+            </button>
             <a href="#home" onclick="toggleMenu()">Home</a>
             <a href="tabs/notes.html">Notes</a>
             <a href="tabs/projects.html">Projects</a>
             <a href="tabs/blog.html">Blog</a>
             <a href="tabs/favorites.html">Favorite</a>
             <a href="#" onclick="openCVViewModal(); toggleMenu(); return false;">CV</a>
-            <div class="theme-picker-container" style="margin: 1.5rem 0 0.5rem 0; justify-content: center;">
-                <div class="theme-picker-btn" data-theme-value="default" onclick="setTheme('default')" title="Default Purple"></div>
-                <div class="theme-picker-btn" data-theme-value="cyan" onclick="setTheme('cyan')" title="Neon Cyan"></div>
-                <div class="theme-picker-btn" data-theme-value="green" onclick="setTheme('green')" title="Emerald Green"></div>
-                <div class="theme-picker-btn" data-theme-value="orange" onclick="setTheme('orange')" title="Sunset Orange"></div>
-                <div class="theme-picker-btn" data-theme-value="red" onclick="setTheme('red')" title="Coral Red"></div>
-                <div class="theme-picker-btn" data-theme-value="light" onclick="setTheme('light')" title="Light Aesthetic"></div>
+            <div class="theme-picker-container" role="group" aria-label="Mobile color themes" style="margin: 0.75rem 0 0.25rem; justify-content: center;">
+                <button type="button" class="theme-picker-btn" data-theme-value="default" onclick="setTheme('default')" title="Cosmic Purple" aria-label="Cosmic Purple theme" aria-pressed="true"></button>
+                <button type="button" class="theme-picker-btn" data-theme-value="cyan" onclick="setTheme('cyan')" title="Neon Cyan" aria-label="Neon Cyan theme" aria-pressed="false"></button>
+                <button type="button" class="theme-picker-btn" data-theme-value="green" onclick="setTheme('green')" title="Emerald Green" aria-label="Emerald Green theme" aria-pressed="false"></button>
+                <button type="button" class="theme-picker-btn" data-theme-value="orange" onclick="setTheme('orange')" title="Sunset Orange" aria-label="Sunset Orange theme" aria-pressed="false"></button>
+                <button type="button" class="theme-picker-btn" data-theme-value="red" onclick="setTheme('red')" title="Coral Red" aria-label="Coral Red theme" aria-pressed="false"></button>
+                <button type="button" class="theme-picker-btn" data-theme-value="light" onclick="setTheme('light')" title="Light Aesthetic" aria-label="Light Aesthetic theme" aria-pressed="false"></button>
             </div>
-            <button class="theme-toggle-btn" onclick="toggleLightTheme()">Light</button>
-            <button class="nav-contact" onclick="openContactModal(); toggleMenu();">Contact</button>
+            <button type="button" class="theme-toggle-btn" onclick="toggleLightTheme()" aria-label="Switch to light theme" aria-pressed="false">Light</button>
+            <button type="button" class="nav-contact" onclick="openContactModal(); toggleMenu();">Contact</button>
         </div>
-        
-        <!-- Overlay for mobile menu -->
-        <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
-    </div>
-    <div class="background-elements"></div>
-    <nav style="display:none"></nav> <!-- nav is now loaded dynamically -->
-    <div class="container" id="home">
-        <div class="content">
-            <div class="coin-container" onclick="tossCoin()" title="Click to Toss Coin! 🪙">
-                <div class="coin" id="shaukatCoin">
-                    <div class="coin-face coin-front">
-                        <img src="small_files/shaukat.png" alt="Shaukat Aziz" class="home-profile-image" loading="lazy">
-                    </div>
-                    <div class="coin-face coin-back" id="coinBack">
-                        <div class="coin-result-title" id="coinResultTitle">HEADS</div>
-                    </div>
-                </div>
-            </div>
-            <h1 style="margin-top: 80px;">Physics & Innovation</h1>
-            <p>
-                Welcome to my academic portfolio. I'm a BS student at the Indian Institute of Science (IISc),
-                pursuing Physics as my major. Explore my projects, blog posts, and publications.
-            </p>
-            <div class="buttons">
-                <button onclick="window.location.href='#cv'">Download CV</button>
-            </div>
-            <div class="social-icons">
-                <a href="https://iisc.academia.edu/SHAUKATAZIZ" title="Academia.edu" target="_blank"><i class="fas fa-graduation-cap"></i></a>
-                <a href="https://www.researchgate.net/profile/Z-Shaukata-Aziz" title="ResearchGate" target="_blank"><i class="fab fa-researchgate"></i></a>
-                <a href="https://www.linkedin.com/in/z-shaukat-aziz-035901265/" title="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/Shaukat-aziz" title="GitHub" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://orcid.org/0009-0002-1133-4041" title="ORCID" target="_blank"><i class="fab fa-orcid"></i></a>
-            </div>
-            
-            <div class="announcement-panel" id="resultAnnouncement">
-                <div class="announcement-content">
-                    <i class="fas fa-bullhorn announcement-icon" id="announcementIcon"></i>
-                    <span class="announcement-text" id="announcementText">Click the portrait to toss a coin, or the dice to roll!</span>
-                </div>
-            </div>
-        </div>
+        <div class="overlay" id="overlay" onclick="toggleMenu()" aria-hidden="true"></div>
+    </header>
 
-        <div class="dice-section-container">
-            <div class="dice-widget-card">
-                <h3>Roll the Dice 🎲</h3>
-                <p class="dice-widget-desc">Click the 3D dice to roll and test your luck!</p>
-                <div class="dice-container" onclick="rollDice()">
-                    <div class="dice" id="physicsDice">
-                        <div class="dice-face face-1">
-                            <span class="dot"></span>
-                        </div>
-                        <div class="dice-face face-2">
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                        </div>
-                        <div class="dice-face face-3">
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                        </div>
-                        <div class="dice-face face-4">
-                            <div class="dot-row">
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                            </div>
-                            <div class="dot-row">
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                            </div>
-                        </div>
-                        <div class="dice-face face-5">
-                            <div class="dot-row">
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                            </div>
-                            <div class="dot-row-center">
-                                <span class="dot"></span>
-                            </div>
-                            <div class="dot-row">
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                            </div>
-                        </div>
-                        <div class="dice-face face-6">
-                            <div class="dot-row">
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                            </div>
-                            <div class="dot-row">
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                            </div>
-                            <div class="dot-row">
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                            </div>
-                        </div>
-                    </div>
+    <main>
+        <!-- Hero Section with 3D Quantum Bloch-Sphere Hologram Portrait -->
+        <section class="hero-section" id="home">
+            <div class="hero-content">
+                <span class="hero-eyebrow"><i class="fas fa-atom"></i> IISc Bangalore · Physics (BS Research)</span>
+                <h1>Physics &amp; Innovation</h1>
+                <p>
+                    Welcome to my academic portfolio. I'm a BS (Research) Physics student at the Indian Institute of Science (IISc),
+                    exploring quantum computation, computational physics, and exotic quantum materials.
+                </p>
+                <div class="buttons">
+                    <a href="#cv" class="btn-primary"><i class="fas fa-file-pdf"></i> Download CV</a>
+                    <a href="tabs/projects.html" class="btn-secondary"><i class="fas fa-flask"></i> Explore Projects</a>
+                </div>
+                <div class="social-icons">
+                    <a href="https://iisc.academia.edu/SHAUKATAZIZ" title="Academia.edu" aria-label="Academia.edu" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap"></i></a>
+                    <a href="https://www.researchgate.net/profile/Z-Shaukata-Aziz" title="ResearchGate" aria-label="ResearchGate" target="_blank" rel="noopener noreferrer"><i class="fab fa-researchgate"></i></a>
+                    <a href="https://www.linkedin.com/in/z-shaukat-aziz-035901265/" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/Shaukat-aziz" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                    <a href="https://orcid.org/0009-0002-1133-4041" title="ORCID" aria-label="ORCID" target="_blank" rel="noopener noreferrer"><i class="fab fa-orcid"></i></a>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="section-container">
-            <h2>About Me</h2>
-            <p>I am a Physics major in my third year of BSc Research program at the prestigious Indian Institute of Science (IISc), Bangalore. I have demonstrated academic excellence with exceptional performance in CBSE board examinations and received a merit certificate for being among the top 0.1% of candidates nationwide in Computer Science.</p>
-            
-            <p>I always had a hobby of exploring new technologies and tools, and after discovering the field of computational physics, I have developed a keen interest in programming and numerical simulations. I am seeking opportunities to apply my analytical abilities and technical knowledge in research projects and contribute to this field while learning from experienced researchers.</p>
-            
-            <div class="education-info">
-                <h3>Education</h3>
-                
-                <div class="education-accordion">
-                    <!-- College Accordion -->
-                    <div class="accordion-item active">
-                        <button class="accordion-header" onclick="toggleAccordion(this)">
-                            <span><i class="fas fa-university header-icon"></i> College Education</span>
-                            <i class="fas fa-chevron-down arrow-icon"></i>
+            <div class="quantum-stage-wrapper">
+                <div class="quantum-stage" id="quantumStage" role="button" tabindex="0" aria-label="Interactive 3D quantum hologram portrait of Shaukat Aziz — click to flip state">
+                    <canvas id="quantumCanvasBack" class="quantum-canvas quantum-canvas-back" aria-hidden="true"></canvas>
+
+                    <div id="quantumRig" class="quantum-portrait-rig">
+                        <div class="quantum-aperture" aria-hidden="true"></div>
+                        <div class="quantum-portrait-depth">
+                            <div id="quantumFlipper" class="quantum-portrait-flipper">
+                                <div class="quantum-portrait-face face-zero">
+                                    <img src="small_files/shaukat.png" alt="Shaukat Aziz — Quantum State |0⟩" class="quantum-portrait-img" fetchpriority="high" decoding="async">
+                                    <div class="quantum-sheen" aria-hidden="true"></div>
+                                </div>
+                                <div class="quantum-portrait-face face-one">
+                                    <img src="small_files/shaukat.jpg" alt="Shaukat Aziz — Quantum State |1⟩" class="quantum-portrait-img" decoding="async">
+                                    <div class="quantum-sheen" aria-hidden="true"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="quantum-hud-chip chip-top" aria-hidden="true">|ψ⟩ = α|0⟩ + β|1⟩</span>
+                        <span class="quantum-hud-chip chip-bottom" aria-hidden="true">IISc · Physics</span>
+                    </div>
+
+                    <canvas id="quantumCanvasFront" class="quantum-canvas quantum-canvas-front" aria-hidden="true"></canvas>
+                </div>
+
+                <div class="quantum-stage-controls">
+                    <button type="button" id="quantumFlipBtn" class="quantum-flip-btn" aria-pressed="false">
+                        <i class="fas fa-rotate"></i>
+                        X-Gate Flip
+                        <span class="ket-badge" id="quantumStateLabel">|0⟩</span>
+                    </button>
+                    <span class="quantum-stage-hint">Move cursor to tilt 3D gimbal · Click to apply X-Gate</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Quantum Probability Lab -->
+        <section id="lab" class="section">
+            <div class="section-container">
+                <h2>Quantum Probability Lab</h2>
+                <p class="section-subtitle">Interactive 3D stochastic widgets — collapse the portrait coin superposition or roll the 3D quantum die.</p>
+                <div class="lab-grid">
+                    <div class="lab-widget-card">
+                        <h3>Quantum Coin Toss</h3>
+                        <p class="dice-widget-desc">Click the 3D portrait coin to measure Heads or Tails!</p>
+                        <button type="button" class="coin-container" onclick="tossCoin()" aria-label="Toss the 3D Shaukat portrait coin">
+                            <div class="coin" id="shaukatCoin">
+                                <div class="coin-face coin-front">
+                                    <img src="small_files/shaukat.jpg" alt="Shaukat Aziz coin portrait" class="home-profile-image" loading="lazy" decoding="async">
+                                </div>
+                                <div class="coin-face coin-back" id="coinBack">
+                                    <div class="coin-result-title" id="coinResultTitle">HEADS</div>
+                                </div>
+                            </div>
                         </button>
-                        <div class="accordion-content">
-                            <div class="education-item">
-                                <h4>Bachelor of Science (Research) - Physics</h4>
-                                <p><strong>Indian Institute of Science (IISc), Bangalore</strong></p>
-                                <p><em>2022 - 2026</em></p>
-                                <p><strong>Cumulative GPA:</strong> 6.5</p>
-                                <p><strong>Coursework:</strong> Classical Mechanics, Quantum Mechanics I & II, Statistical Mechanics, Math Methods of Physics, Quantum Technologies, Computational Physics, Fundamentals of Astrophysics, Quantum Computation, Quantum Field Theory on a Quantum Computer.</p>
-                            </div>
-                        </div>
                     </div>
 
-                    <!-- School Accordion -->
-                    <div class="accordion-item">
-                        <button class="accordion-header" onclick="toggleAccordion(this)">
-                            <span><i class="fas fa-school header-icon"></i> Schooling</span>
-                            <i class="fas fa-chevron-down arrow-icon"></i>
+                    <div class="lab-widget-card">
+                        <h3>Roll the 3D Dice</h3>
+                        <p class="dice-widget-desc">Click the 3D quantum cube to roll a random basis state (1–6)!</p>
+                        <button type="button" class="dice-container" onclick="rollDice()" aria-label="Roll the 3D dice">
+                            <div class="dice" id="physicsDice">
+                                <div class="dice-face face-1">
+                                    <span class="dot"></span>
+                                </div>
+                                <div class="dice-face face-2">
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </div>
+                                <div class="dice-face face-3">
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </div>
+                                <div class="dice-face face-4">
+                                    <div class="dot-row">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </div>
+                                    <div class="dot-row">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </div>
+                                </div>
+                                <div class="dice-face face-5">
+                                    <div class="dot-row">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </div>
+                                    <div class="dot-row-center">
+                                        <span class="dot"></span>
+                                    </div>
+                                    <div class="dot-row">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </div>
+                                </div>
+                                <div class="dice-face face-6">
+                                    <div class="dot-row">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </div>
+                                    <div class="dot-row">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </div>
+                                    <div class="dot-row">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </div>
+                                </div>
+                            </div>
                         </button>
-                        <div class="accordion-content">
-                            <div class="education-item">
-                                <h4>Higher Secondary (XII) - CBSE Board</h4>
-                                <p><strong>Velammal Vidyalaya, Mel Ayanambakkam, Chennai</strong></p>
-                                <p><em>2020-2022</em></p>
-                                <p>Science Stream with Computer Science | <strong>Overall Percentage: 96.4%</strong></p>
-                                <p><strong>Grades:</strong> Computer Science (100), Chemistry (99), Mathematics (95), Physics (95), English Core (93), Physical Education (91).</p>
-                                <p>Received Certificate of Merit for being among top 0.1% candidates in Computer Science</p>
+                    </div>
+                </div>
+
+                <div class="announcement-panel" id="resultAnnouncement" aria-live="polite">
+                    <div class="announcement-content">
+                        <i class="fas fa-bullhorn announcement-icon" id="announcementIcon"></i>
+                        <span class="announcement-text" id="announcementText">Click the portrait coin to toss, or click the 3D die to roll!</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="section-container">
+                <h2>About Me</h2>
+                <div class="about-intro-grid">
+                    <figure class="about-portrait-card">
+                        <img src="small_files/shaukat1.jpg" alt="Shaukat Aziz, Physics Research Student at IISc Bangalore" class="about-portrait-img" loading="lazy" decoding="async">
+                        <figcaption class="about-portrait-caption">Shaukat Aziz · IISc Physics</figcaption>
+                    </figure>
+                    <div>
+                        <p>I am a Physics major in the BSc Research program at the prestigious Indian Institute of Science (IISc), Bangalore. I have demonstrated academic excellence with exceptional performance in CBSE board examinations and received a merit certificate for being among the top 0.1% of candidates nationwide in Computer Science.</p>
+                        <p>I always had a hobby of exploring new technologies and tools, and after discovering the field of computational physics, I have developed a keen interest in programming and numerical simulations. I am seeking opportunities to apply my analytical abilities and technical knowledge in research projects and contribute to this field while learning from experienced researchers.</p>
+                    </div>
+                </div>
+
+                <div class="education-info">
+                    <h3>Education</h3>
+
+                    <div class="education-accordion">
+                        <!-- College Accordion -->
+                        <div class="accordion-item active">
+                            <button type="button" class="accordion-header" onclick="toggleAccordion(this)" aria-expanded="true">
+                                <span><i class="fas fa-university header-icon"></i> College Education</span>
+                                <i class="fas fa-chevron-down arrow-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="education-item">
+                                    <h4>Bachelor of Science (Research) - Physics</h4>
+                                    <p><strong>Indian Institute of Science (IISc), Bangalore</strong></p>
+                                    <p><em>2022 - 2026</em></p>
+                                    <p><strong>Cumulative GPA:</strong> 6.5</p>
+                                    <p><strong>Coursework:</strong> Classical Mechanics, Quantum Mechanics I &amp; II, Statistical Mechanics, Math Methods of Physics, Quantum Technologies, Computational Physics, Fundamentals of Astrophysics, Quantum Computation, Quantum Field Theory on a Quantum Computer.</p>
+                                </div>
                             </div>
-                            <div class="education-item" style="border-top: 1px solid rgba(139, 0, 255, 0.15); padding-top: 1.5rem; margin-top: 1.5rem;">
-                                <h4>Joint Entrance Examination (JEE) Main - 2022</h4>
-                                <p><strong>National Testing Agency (NTA)</strong></p>
-                                <p><em>Session 1 (June 2022)</em></p>
-                                <p><strong>Total NTA Score (Percentile): 99.089</strong></p>
-                                <p>Subject-wise Percentiles: Chemistry (99.208), Mathematics (98.510), Physics (98.355)</p>
+                        </div>
+
+                        <!-- School Accordion -->
+                        <div class="accordion-item">
+                            <button type="button" class="accordion-header" onclick="toggleAccordion(this)" aria-expanded="false">
+                                <span><i class="fas fa-school header-icon"></i> Schooling</span>
+                                <i class="fas fa-chevron-down arrow-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="education-item">
+                                    <h4>Higher Secondary (XII) - CBSE Board</h4>
+                                    <p><strong>Velammal Vidyalaya, Mel Ayanambakkam, Chennai</strong></p>
+                                    <p><em>2020-2022</em></p>
+                                    <p>Science Stream with Computer Science | <strong>Overall Percentage: 96.4%</strong></p>
+                                    <p><strong>Grades:</strong> Computer Science (100), Chemistry (99), Mathematics (95), Physics (95), English Core (93), Physical Education (91).</p>
+                                    <p>Received Certificate of Merit for being among top 0.1% candidates in Computer Science</p>
+                                </div>
+                                <div class="education-item education-item-divider">
+                                    <h4>Joint Entrance Examination (JEE) Main - 2022</h4>
+                                    <p><strong>National Testing Agency (NTA)</strong></p>
+                                    <p><em>Session 1 (June 2022)</em></p>
+                                    <p><strong>Total NTA Score (Percentile): 99.089</strong></p>
+                                    <p>Subject-wise Percentiles: Chemistry (99.208), Mathematics (98.510), Physics (98.355)</p>
+                                </div>
+                                <div class="education-item education-item-divider">
+                                    <h4>Secondary School (X) - CBSE Board</h4>
+                                    <p><strong>Alpha Wisdom Vidyashram, K.K. Nagar, Trichy</strong></p>
+                                    <p><em>2018-2020</em></p>
+                                    <p><strong>Overall Percentage: 96.4%</strong></p>
+                                    <p><strong>Grades:</strong> Hindi Course-B (99), Mathematics Standard (98), English Lng &amp; Lit. (97), Information Technology (97), Social Science (95), Science - Theory (93).</p>
+                                    <p>Additional Subject: Information Technology with NSQF Level-2 certification</p>
+                                </div>
                             </div>
-                            <div class="education-item" style="border-top: 1px solid rgba(139, 0, 255, 0.15); padding-top: 1.5rem; margin-top: 1.5rem;">
-                                <h4>Secondary School (X) - CBSE Board</h4>
-                                <p><strong>Alpha Wisdom Vidyashram, K.K. Nagar, Trichy</strong></p>
-                                <p><em>2018-2020</em></p>
-                                <p><strong>Overall Percentage: 96.4%</strong></p>
-                                <p><strong>Grades:</strong> Hindi Course-B (99), Mathematics Standard (98), English Lng & Lit. (97), Information Technology (97), Social Science (95), Science - Theory (93).</p>
-                                <p>Additional Subject: Information Technology with NSQF Level-2 certification</p>
+                        </div>
+
+                        <!-- Self Accordion -->
+                        <div class="accordion-item">
+                            <button type="button" class="accordion-header" onclick="toggleAccordion(this)" aria-expanded="false">
+                                <span><i class="fas fa-user-graduate header-icon"></i> Self-Education &amp; Skills</span>
+                                <i class="fas fa-chevron-down arrow-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="education-item">
+                                    <h4>Computational Physics &amp; Programming</h4>
+                                    <p><strong>Independent Study &amp; Open-Source Projects</strong></p>
+                                    <p><em>Ongoing</em></p>
+                                    <p>Self-taught proficiency in scientific programming languages including <strong>Python, C++, and MATLAB</strong>.</p>
+                                    <p>Developed customized simulations for complex dynamics, statistical physics models, and numerical calculations.</p>
+                                </div>
+                                <div class="education-item education-item-divider">
+                                    <h4>Advanced Physics &amp; Mathematics</h4>
+                                    <p><strong>Self-Directed Coursework</strong></p>
+                                    <p>In-depth self-study of advanced curriculum topics including <em>Quantum Field Theory, General Relativity, and Classical Electrodynamics</em>.</p>
+                                    <p>Exploring modern academic research literature and translating theoretical models into interactive visualizations.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
 
-                    <!-- Self Accordion -->
-                    <div class="accordion-item">
-                        <button class="accordion-header" onclick="toggleAccordion(this)">
-                            <span><i class="fas fa-user-graduate header-icon"></i> Self-Education & Skills</span>
-                            <i class="fas fa-chevron-down arrow-icon"></i>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="education-item">
-                                <h4>Computational Physics & Programming</h4>
-                                <p><strong>Independent Study & Open-Source Projects</strong></p>
-                                <p><em>Ongoing</em></p>
-                                <p>Self-taught proficiency in scientific programming languages including <strong>Python, C++, and MATLAB</strong>.</p>
-                                <p>Developed customized simulations for complex dynamics, statistical physics models, and numerical calculations.</p>
-                            </div>
-                            <div class="education-item" style="border-top: 1px solid rgba(139, 0, 255, 0.15); padding-top: 1.5rem; margin-top: 1.5rem;">
-                                <h4>Advanced Physics & Mathematics</h4>
-                                <p><strong>Self-Directed Coursework</strong></p>
-                                <p>In-depth self-study of advanced curriculum topics including <em>Quantum Field Theory, General Relativity, and Classical Electrodynamics</em>.</p>
-                                <p>Exploring modern academic research literature and translating theoretical models into interactive visualizations.</p>
-                            </div>
+        <!-- Research Section -->
+        <section id="research" class="section">
+            <div class="section-container">
+                <h2>Research Interests</h2>
+                <div class="research-areas">
+                    <div class="research-card">
+                        <h3>Quantum Computing</h3>
+                        <p>Exploring the principles and applications of quantum computation.</p>
+                    </div>
+                    <div class="research-card">
+                        <h3>Computational Physics</h3>
+                        <p>Numerical and computational methods for solving complex physical problems.</p>
+                    </div>
+                    <div class="research-card">
+                        <h3>Quantum Materials</h3>
+                        <p>Studying materials with exotic quantum properties and their technological potential.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="section-container">
+                <h2>Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div>
+                            <h3>Quantum Simulation Project</h3>
+                            <p>Computational study of quantum systems using Python.</p>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/SHAUKAT23/PH354" class="project-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            <a href="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/PH354.pdf" class="project-link" target="_blank" rel="noopener noreferrer">Paper</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Research Section -->
-    <section id="research" class="section">
-        <div class="section-container">
-            <h2>Research Interests</h2>
-            <div class="research-areas">
-                <div class="research-card">
-                    <h3>Quantum Computing</h3>
-                    <p>Exploring the principles and applications of quantum computation.</p>
-                </div>
-                <div class="research-card">
-                    <h3>Computational Physics</h3>
-                    <p>Numerical and computational methods for solving complex physical problems.</p>
-                </div>
-                <div class="research-card">
-                    <h3>Quantum Materials</h3>
-                    <p>Studying materials with exotic quantum properties and their technological potential.</p>
+        <!-- CV Section -->
+        <section id="cv" class="section">
+            <div class="section-container">
+                <h2>Curriculum Vitae</h2>
+                <p style="text-align: center; max-width: 60ch; margin: 0 auto;">Download my complete academic CV to learn more about my educational background, research experience, and achievements.</p>
+                <div class="cv-actions">
+                    <a href="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/shaukat_cv.pdf" class="cv-download-btn" download target="_blank" rel="noopener noreferrer">Download PDF</a>
+                    <button type="button" class="cv-view-btn" onclick="openCVViewModal()">View Online</button>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <div class="section-container">
-            <h2>Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>Quantum Simulation Project</h3>
-                    <p>Computational study of quantum systems using Python.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/SHAUKAT23/PH354" class="project-link">GitHub</a>
-                        <a href="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/PH354.pdf" class="project-link">Paper</a>
-                    </div>
-                </div>
-            </div>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="26" height="26" aria-hidden="true">
+                <defs>
+                    <linearGradient id="footOrbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="var(--accent)" />
+                        <stop offset="100%" stop-color="var(--accent-cyan)" />
+                    </linearGradient>
+                </defs>
+                <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="url(#footOrbGrad)" stroke-width="2.5" />
+                <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="url(#footOrbGrad)" stroke-width="2.5" transform="rotate(60 50 50)" />
+                <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="url(#footOrbGrad)" stroke-width="2.5" transform="rotate(-60 50 50)" />
+                <circle cx="50" cy="50" r="10" fill="var(--accent-soft)" />
+            </svg>
+            <span>Shaukat Aziz · shaukataziz.vip</span>
         </div>
-    </section>
-
-
-    <!-- CV Section -->
-    <section id="cv" class="section">
-        <div class="section-container">
-            <h2>Curriculum Vitae</h2>
-            <p>Download my complete academic CV to learn more about my educational background, research experience, and achievements.</p>
-            <div class="cv-actions">
-                <a href="https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/shaukat_cv.pdf" class="cv-download-btn" download>Download PDF</a>
-                <button class="cv-view-btn" onclick="openCVViewModal()">View Online</button>
-            </div>
+        <div class="footer-links">
+            <a href="tabs/notes.html">Notes</a>
+            <a href="tabs/projects.html">Projects</a>
+            <a href="tabs/blog.html">Blog</a>
+            <a href="tabs/favorites.html">Favorites</a>
         </div>
-    </section>
+        <span>&copy; 2026 Shaukat Aziz · Hosted on Netlify</span>
+    </footer>
 
     <!-- Contact Modal -->
-    <div class="contact-modal" id="contactModal">
+    <div class="contact-modal" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
         <div class="contact-modal-content">
             <div class="contact-modal-header">
-                <h3>Contact Me</h3>
-                <button class="contact-close-btn" onclick="closeContactModal()">
+                <h3 id="contactModalTitle">Contact Me</h3>
+                <button type="button" class="contact-close-btn" onclick="closeContactModal()" aria-label="Close contact dialog">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="contact-modal-body">
                 <p>Get in touch for research collaborations, academic discussions, or any inquiries.</p>
-                
+
                 <div class="contact-options">
                     <a href="mailto:shaukataziz@atomicmail.io" class="contact-option">
                         <i class="fas fa-envelope"></i>
                         <span>shaukataziz@atomicmail.io</span>
                     </a>
-                    
+
                     <a href="https://t.me/shaukatazizzz" class="contact-option" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-telegram"></i>
                         <span>t.me/shaukatazizzz</span>
@@ -365,20 +564,22 @@
     </div>
 
     <!-- CV Viewer Modal -->
-    <div class="cv-view-modal" id="cvViewModal">
+    <div class="cv-view-modal" id="cvViewModal" role="dialog" aria-modal="true" aria-labelledby="cvModalTitle">
         <div class="cv-view-modal-content">
             <div class="cv-view-modal-header">
-                <h3>Curriculum Vitae - Shaukat Aziz</h3>
-                <button class="cv-view-close-btn" onclick="closeCVViewModal()">
+                <h3 id="cvModalTitle">Curriculum Vitae - Shaukat Aziz</h3>
+                <button type="button" class="cv-view-close-btn" onclick="closeCVViewModal()" aria-label="Close CV viewer">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="cv-view-modal-body">
-                <iframe id="cvViewFrame" src="" width="100%" height="100%" frameborder="0"></iframe>
+                <iframe id="cvViewFrame" src="" title="Shaukat Aziz Curriculum Vitae"></iframe>
             </div>
         </div>
     </div>
 
-    <script src="js/script.js?v=1.0.2"></script>
+    <script src="js/script.js?v=2.0.0" defer></script>
+    <script src="js/quantum-3d.js?v=2.0.0" defer></script>
 </body>
+
 </html>

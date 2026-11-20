@@ -3,26 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog — Shaukat Aziz</title>
+    <meta name="description" content="Latest physics and quantum computing blog posts by Shaukat Aziz.">
+    <meta name="author" content="Shaukat Aziz">
+    <link rel="canonical" href="https://shaukataziz.vip/tabs/blog.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shaukataziz.vip/tabs/blog.html">
+    <meta property="og:title" content="Blog — Shaukat Aziz">
+    <meta property="og:description" content="Latest essays and posts on quantum computing and computational physics by Shaukat Aziz.">
+    <meta property="og:image" content="https://shaukataziz.vip/small_files/shaukat1.jpg">
+    <meta name="theme-color" content="#070714">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
     <script>
-        (function() {
-            const savedTheme = localStorage.getItem('site-theme') || 'default';
-            if (savedTheme !== 'default') {
-                document.documentElement.setAttribute('data-theme', savedTheme);
-            }
+        (function () {
+            try {
+                var savedTheme = localStorage.getItem('site-theme') || 'default';
+                if (savedTheme !== 'default') {
+                    document.documentElement.setAttribute('data-theme', savedTheme);
+                }
+                if (savedTheme === 'light') {
+                    var tc = document.querySelector('meta[name="theme-color"]');
+                    if (tc) tc.setAttribute('content', '#f8fafc');
+                }
+            } catch (_) {}
         })();
     </script>
-    <link rel="stylesheet" href="../css/style.css?v=1.0.2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css?v=2.0.0">
 </head>
 <body>
-    <div id="navbar"></div>
-    <section class="section tab-page-offset">
-        <div class="section-container">
-            <h2 style="margin-top: 80px;">Latest Blog Posts</h2>
-            <div class="blog-posts">
-                <iframe src="https://qphysix.blogspot.com/2025/06/quantum-computing.html" width="100%" height="600" style="border:none;overflow:auto;" title="Quantum Computing Blog"></iframe>
+    <div class="background-elements" aria-hidden="true"></div>
+    <header id="navbar"></header>
+
+    <main>
+        <section class="section tab-page-offset">
+            <div class="section-container">
+                <h2>Latest Blog Posts</h2>
+                <div class="blog-posts">
+                    <iframe src="https://qphysix.blogspot.com/2025/06/quantum-computing.html" class="blog-embed-frame" loading="lazy" title="Quantum Computing Blog"></iframe>
+                </div>
             </div>
-        </div>
-    </section>
-    <script src="nav.js"></script>
+        </section>
+    </main>
+
+    <script src="nav.js?v=2.0.0" defer></script>
 </body>
 </html>
