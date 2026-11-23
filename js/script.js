@@ -1,6 +1,6 @@
 // Core UI, Theme System, Accordions, Navigation Drawer & Modals
 
-const CV_PDF_URL = 'https://pub-12c622eb3e0d466d90604b9b34319099.r2.dev/content/shaukat_cv.pdf';
+const CV_PDF_FILENAME = 'small_files/Z%20Shaukat%20Aziz%20-%20Curriculum%20Vitae.pdf';
 
 window.setTheme = function (theme) {
     const validThemes = ['default', 'cyan', 'green', 'orange', 'red', 'light'];
@@ -107,13 +107,22 @@ window.openCVViewModal = function () {
     const frame = document.getElementById('cvViewFrame');
     if (!modal || !frame) return;
 
+    const isSubpage = /\/tabs\//.test(window.location.pathname);
+    const cvRelativeUrl = (isSubpage ? '../' : '') + CV_PDF_FILENAME;
+    const absoluteCvUrl = new URL(cvRelativeUrl, window.location.href).href;
+    const isLocalHost =
+        window.location.protocol === 'file:' ||
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1';
+
     const isMobile =
         window.innerWidth <= 768 ||
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-    frame.src = isMobile
-        ? `https://docs.google.com/viewer?url=${encodeURIComponent(CV_PDF_URL)}&embedded=true`
-        : CV_PDF_URL;
+    frame.src =
+        isMobile && !isLocalHost
+            ? `https://docs.google.com/viewer?url=${encodeURIComponent(absoluteCvUrl)}&embedded=true`
+            : cvRelativeUrl;
 
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';

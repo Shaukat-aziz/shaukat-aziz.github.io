@@ -17,7 +17,7 @@ from pathlib import Path
 import re
 import shutil
 import sys
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
 
 
 PUBLIC_DIRS = ("css", "js", "tabs", "small_files", "assets")
@@ -179,7 +179,7 @@ def audit_dist(dist_dir: Path) -> list[str]:
         for attr, ref in auditor.refs:
             if is_external_or_virtual(ref):
                 continue
-            clean_ref = ref.split("#", 1)[0].split("?", 1)[0]
+            clean_ref = unquote(ref.split("#", 1)[0].split("?", 1)[0])
             if not clean_ref:
                 continue
 
